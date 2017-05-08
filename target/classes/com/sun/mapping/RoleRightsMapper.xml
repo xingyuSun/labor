@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.RoleRightsDao" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.rolerightsKey" >
+    <id column="userID" property="userid" jdbcType="INTEGER" />
+    <id column="rightsID" property="rightsid" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.rolerightsKey" >
+    delete from rolerights
+    where userID = #{userid,jdbcType=INTEGER}
+      and rightsID = #{rightsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.rolerightsKey" >
+    insert into rolerights (userID, rightsID)
+    values (#{userid,jdbcType=INTEGER}, #{rightsid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.rolerightsKey" >
+    insert into rolerights
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="rightsid != null" >
+        rightsID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="rightsid != null" >
+        #{rightsid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

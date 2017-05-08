@@ -52,7 +52,7 @@ public class UserController {
 			Map<String, String> map = new HashMap<String, String>();
 			//map.put("userName", name);
 			//map.put("userID", String.valueOf(ID));			
-			ModelAndView m = new ModelAndView("redirect:/user/register");
+			ModelAndView m = new ModelAndView("redirect:/systemmanage/rolerightsmanagement");
 			//m.addObject("map", map);
 			session.setAttribute("userID", String.valueOf(ID));
 			session.setAttribute("userName", name);

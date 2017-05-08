@@ -1,8 +1,13 @@
 package com.sun.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.sun.pojo.Role;
 
 public interface RoleDao {
+	public List<Map<String,Object>> getRole();
+	
     int deleteByPrimaryKey(Integer roleid);
 
     int insert(Role record);

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.RightsDao" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.Rights" >
+    <id column="rightsID" property="rightsid" jdbcType="INTEGER" />
+    <result column="rightsName" property="rightsname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rightsID, rightsName
+  </sql>
+  
+   <select id="getUserRights"  resultType="java.util.HashMap">
+     select * from role u,rights r,rolerights s where u.roleID=s.roleID and s.rightsID=r.rightsID
+  </select>
+  
+<!--   <select id="getUserRights"  resultType="java.util.HashMap">
+     select * from rights u,rights r,userrights s where u.userID=s.userID and s.rightsID=r.rightsID
+  </select> -->
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rights
+    where rightsID = #{rightsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rights
+    where rightsID = #{rightsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.Rights" >
+    insert into rights (rightsID, rightsName)
+    values (#{rightsid,jdbcType=INTEGER}, #{rightsname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.Rights" >
+    insert into rights
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rightsid != null" >
+        rightsID,
+      </if>
+      <if test="rightsname != null" >
+        rightsName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rightsid != null" >
+        #{rightsid,jdbcType=INTEGER},
+      </if>
+      <if test="rightsname != null" >
+        #{rightsname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sun.pojo.Rights" >
+    update rights
+    <set >
+      <if test="rightsname != null" >
+        rightsName = #{rightsname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rightsID = #{rightsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sun.pojo.Rights" >
+    update rights
+    set rightsName = #{rightsname,jdbcType=VARCHAR}
+    where rightsID = #{rightsid,jdbcType=INTEGER}
+  </update>
+</mapper>

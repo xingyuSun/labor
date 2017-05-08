@@ -6,32 +6,32 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>诚业建筑 | 劳务结算</title>
-    <%String path=request.getContextPath();%>
+    <%String path=request.getContextPath()+"/rec";%>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=path%>/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- daterange picker -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="<%=path%>/daterangepicker/daterangepicker-bs3.css">
     <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="<%=path%>/datepicker/datepicker3.css">
     <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/plugins/colorpicker/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="<%=path%>/colorpicker/bootstrap-colorpicker.min.css">
     <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/plugins/timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="<%=path%>/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="<%=path%>/select2/select2.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<%=path%>/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/plugins/iCheck/flat/blue.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/rec/dist/css/main.css">
+    <link rel="stylesheet" href="<%=path%>/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="<%=path%>/iCheck/flat/blue.css">
+    <link rel="stylesheet" href="<%=path%>/dist/css/main.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -232,128 +232,23 @@
                                     <th>角色编号</th>
                                     <th>角色名称</th>
                                     <th>角色备注</th>
-                                    <th>    </th>
-                                    <th>操作</th>
-                                    <th>    </th>
+                                    <th><button type="button" id="change" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
+                                    <th><button type="button" id="delete" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>00000001</td>
-                                    <td>admin</td>
-                                    <td>admin管理员</td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">详细</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></td>
-                                    <td><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></td>
-                                </tr>
-
-
-
+                                	 <c:forEach items="${listMap}" var="item">
+                                     	<tr>
+                                   			<td name="id">${item.roleID}</td>
+                                   			<td>${item.roleName}</td>
+                                   			<td>${item.roleRemarks}</td>
+                                   			<td><input type="radio" name="ss"></td>
+                                            <td><input name="delete" type="checkbox"></td>
+                                     	</tr>
+                                     </c:forEach>
+                                </tbody>
                             </table>
+                            
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -361,9 +256,9 @@
                 </div>
                 <!-- /.col -->
             </div>
+            
             <!-- /.row -->
         </section>
-        <!-- /.content -->
 
     </div>
 
@@ -402,42 +297,70 @@
 <!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->
 <div class="control-sidebar-bg"></div>
-</div>
+
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
-<script src="<%=request.getContextPath()%>/rec/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="<%=path%>/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="<%=request.getContextPath()%>/rec/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=path%>/bootstrap/js/bootstrap.min.js"></script>
 <!-- Select2 -->
-<script src="<%=request.getContextPath()%>/rec/plugins/select2/select2.full.min.js"></script>
+<script src="<%=path%>/select2/select2.full.min.js"></script>
 <!-- iCheck -->
-<script src="<%=request.getContextPath()%>/rec/plugins/iCheck/icheck.min.js"></script>
+<script src="<%=path%>/iCheck/icheck.min.js"></script>
 <!-- DataTables -->
-<script src="<%=request.getContextPath()%>/rec/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<%=request.getContextPath()%>/rec/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="<%=path%>/datatables/jquery.dataTables.min.js"></script>
+<script src="<%=path%>/datatables/dataTables.bootstrap.min.js"></script>
 
 <!-- date-range-picker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="<%=request.getContextPath()%>/rec/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
 
 <!-- SlimScroll 1.3.0 -->
-<script src="<%=request.getContextPath()%>/rec/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="<%=path%>/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="<%=request.getContextPath()%>/rec/plugins/fastclick/fastclick.js"></script>
+<script src="<%=path%>/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="<%=request.getContextPath()%>/rec/dist/js/app.min.js"></script>
+<script src="<%=path%>/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=request.getContextPath()%>/rec/dist/js/demo.js"></script>
+<script src="<%=path%>/dist/js/demo.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="<%=request.getContextPath()%>/rec/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
 <!-- page script -->
 <script>
     $(function () {
         $("#example1").DataTable();
         $('#reservation1').daterangepicker();
-    });
+        
+
+
+        $("#change").click(function(){
+
+        
+            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                //alert(n);
+                h = $(this).parents("tr").find("[name='id']").text();
+                alert(h);
+            });
+                //$("#example1").find("tr:eq("+n+")").remove();
+        });
+       
+
+        $("#delete").click(function(){
+            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                //alert(n);
+                h = $(this).parents("tr").find("[name='id']").text();
+                alert(h);
+            });
+        });
+
+   });
+
+
+
 
 </script>
 </body>

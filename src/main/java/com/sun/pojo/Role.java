@@ -5,8 +5,6 @@ public class Role {
 
     private String rolename;
 
-    private Integer rightsid;
-
     private String roleremarks;
 
     public Integer getRoleid() {
@@ -23,14 +21,6 @@ public class Role {
 
     public void setRolename(String rolename) {
         this.rolename = rolename == null ? null : rolename.trim();
-    }
-
-    public Integer getRightsid() {
-        return rightsid;
-    }
-
-    public void setRightsid(Integer rightsid) {
-        this.rightsid = rightsid;
     }
 
     public String getRoleremarks() {
