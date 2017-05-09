@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.pojo.rolerightsKey;
 import com.sun.service.RoleService;
 import com.sun.service.RoleRightsService;
 
@@ -49,18 +51,63 @@ public class SystemManageController {
 		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
 		ModelAndView m = new ModelAndView("systemmanage/rolerightsmanagement");
 		List<Map<String,Object>> mapList=roleRightsService.getRoleRights();
+		List<Map<String,Object>> mapLists=roleRightsService.getRights();
+		List<Map<String,Object>> mapListr=roleService.getRole();
 		for(int i=0;i<mapList.size();i++){
-			System.out.println(mapList.get(i).get("roleID"));
-			System.out.println(mapList.get(i).get("roleName"));
-			System.out.println(mapList.get(i).get("rightsID"));			
-			System.out.println(mapList.get(i).get("rightsName"));
+//			System.out.println(mapList.get(i).get("roleID"));
+//			System.out.println(mapList.get(i).get("roleName"));
+//			System.out.println(mapList.get(i).get("rightsID"));			
+//			System.out.println(mapList.get(i).get("rightsName"));
 		}
 		m.addObject("nameAndID", nameAndID);
 		m.addObject("listMap", mapList);
+		m.addObject("listMaps", mapLists);
+		m.addObject("listMapr", mapListr);
 		return m;
 	}
 	
+	@RequestMapping(value="/deleteRolerights",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doDeleteRolerights(rolerightsKey rolerightsKey,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(rolerightsKey.getRoleid());
+		System.out.println(rolerightsKey.getRightsid());
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(roleRightsService.deleteRoleRights(rolerightsKey))
+		{
+			map.put("success", "true");
+		} 
+		else
+		{
+			map.put("success", "false");
+		}
+		return map;  
+		
+//		ModelAndView m = new ModelAndView("redirect:/systemmanage/rolerightsmanagement");
+//		return m;
+//		if(service.addIncomeAndExpenditure(incomeAndExpenditure))
+//		{
+//			map.put("success", "true");
+//		} 
+
+	}
 	
+	@RequestMapping(value="/addRolerights",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public ModelAndView doAddRolerights(HttpServletRequest request,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		String rolename =new String((request.getParameter("rolename")).getBytes("iso-8859-1"),"utf-8");
+		String rightsname =new String((request.getParameter("rightsname")).getBytes("iso-8859-1"),"utf-8");
+		System.out.println(rolename);
+		System.out.println(rightsname);
+		roleRightsService.insertRoleRights(rolename,rightsname);
+		ModelAndView m = new ModelAndView("redirect:/systemmanage/rolerightsmanagement");
+		return m;
+	}
 	
 	
 	@RequestMapping(value="/getRole",produces="application/json;charset=UTF-8")

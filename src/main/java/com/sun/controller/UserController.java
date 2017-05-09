@@ -45,13 +45,14 @@ public class UserController {
 	public ModelAndView CheckLogin(User user,HttpSession session){
 		boolean flg=userService.userCheckUser(user);
 		if(flg) {
-			System.out.println("成功");
+
 			User u= userService.getUserByLoginName(user.getLoginname());
 			String name=u.getLoginname(); 
 			int ID = u.getUserid();			
 			Map<String, String> map = new HashMap<String, String>();
 			//map.put("userName", name);
 			//map.put("userID", String.valueOf(ID));			
+			//System.out.println(user.getLoginname());
 			ModelAndView m = new ModelAndView("redirect:/systemmanage/rolerightsmanagement");
 			//m.addObject("map", map);
 			session.setAttribute("userID", String.valueOf(ID));

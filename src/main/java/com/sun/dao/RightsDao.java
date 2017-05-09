@@ -8,6 +8,8 @@ import com.sun.pojo.Rights;
 public interface RightsDao {
 	public List<Map<String,Object>> getUserRights();
 	
+	public List<Map<String,Object>> getRights();
+	
     int deleteByPrimaryKey(Integer rightsid);
 
     int insert(Rights record);

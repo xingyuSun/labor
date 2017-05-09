@@ -239,9 +239,9 @@
                                 <tbody>
                                    <c:forEach items="${listMap}" var="item">
                                         <tr>
-                                            <td name="id">${item.roleID}</td>
+                                            <td name="roleID">${item.roleID}</td>
                                             <td>${item.roleName}</td>
-                                            <td>${item.rightsID}</td>
+                                            <td name="rightsID">${item.rightsID}</td>
                                             <td>${item.rightsName}</td>
                                             <td><input type="checkbox"></td>                                  
                                         </tr>
@@ -276,23 +276,19 @@
                             </h4>
                         </div>
 
-                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="<%=request.getContextPath()%>/systemmanage/addRolerights" data-toggle="validator" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="control-label col-md-2">角色名称</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" style="width: 100%;">
-                                                  <c:forEach items="${listMap}" var="item">
+                                                <select class="form-control select2" name="rolename" style="width: 100%;">
+                                                  <c:forEach items="${listMapr}" var="item">
 
                                                      
-                                                    <option selected="selected">ssss</option>
-                                                    <option>${item.roleName}</option>
-                                                    <option>信用卡</option>
-                                                    <option>电子账户</option>
-                                                    <option>投资账户</option>
-                                                    <option>其他</option>
+                                                    <option selected="selected">${item.roleName}</option>
+
                                                   </c:forEach>
                                                 </select>
                                             </div>
@@ -300,8 +296,8 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2">权限名称</label>
                                             <div class="col-md-10">
-                                               <select class="form-control select2" style="width: 100%;">
-                                                    <c:forEach  items="${listMap}" var="item">
+                                               <select class="form-control select2" name="rightsname" style="width: 100%;">
+                                                    <c:forEach  items="${listMaps}" var="item">
                                                        <option selected="selected">${item.rightsName}</option>
                                                     </c:forEach>
                                                 </select>
@@ -410,9 +406,37 @@
             $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
                 n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
                 //alert(n);
-                h = $(this).parents("tr").find("[name='id']").text();
-                alert(h);
+                h = $(this).parents("tr").find("[name='roleID']").text();
+                s = $(this).parents("tr").find("[name='rightsID']").text();
+                //alert(h);
             });
+ 	        var jsontest={
+     			 roleid:h,
+     			 rightsid:s
+    	        };
+    	    alert(jsontest);
+               var $a = $(this);  
+               $.ajax({  
+                  url:"<%=request.getContextPath()%>/systemmanage/deleteRolerights",  
+                  type:'post',  
+                  data:jsontest,  
+                  dataType: 'json',  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("删除成功");    		
+            		
+         		  }
+        		   else
+         		  {
+         		  	alert("删除失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+            
         });
         
         

@@ -1,16 +1,16 @@
 package com.sun.pojo;
 
 public class rolerightsKey {
-    private Integer userid;
+    private Integer roleid;
 
     private Integer rightsid;
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getRoleid() {
+        return roleid;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setRoleid(Integer roleid) {
+        this.roleid = roleid;
     }
 
     public Integer getRightsid() {

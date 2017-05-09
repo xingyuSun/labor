@@ -13,6 +13,10 @@
      select * from role u,rights r,rolerights s where u.roleID=s.roleID and s.rightsID=r.rightsID
   </select>
   
+   <select id="getRights"  resultType="java.util.HashMap">
+     select * from rights
+  </select>
+  
 <!--   <select id="getUserRights"  resultType="java.util.HashMap">
      select * from rights u,rights r,userrights s where u.userID=s.userID and s.rightsID=r.rightsID
   </select> -->
