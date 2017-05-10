@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.TaskDao" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.TaskKey" >
+    <id column="taskID" property="taskid" jdbcType="INTEGER" />
+    <id column="taskName" property="taskname" jdbcType="VARCHAR" />
+  </resultMap>
+   
+  <select id="checkTask" parameterType="com.sun.pojo.TaskKey"  resultType="com.sun.pojo.TaskKey">
+     select * from task where   taskID = #{taskid,jdbcType=INTEGER}
+  </select> 
+   
+  <select id="getTask"  resultType="java.util.HashMap">
+     select * from task
+  </select>
+  
+  <update id="changeTask"  parameterType="com.sun.pojo.TaskKey">
+     update task set taskName = #{taskname,jdbcType=VARCHAR} where taskID = #{taskid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.TaskKey" >
+    delete from task
+    where taskID = #{taskid,jdbcType=INTEGER}
+      and taskName = #{taskname,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.sun.pojo.TaskKey" >
+    insert into task (taskID, taskName)
+    values (#{taskid,jdbcType=INTEGER}, #{taskname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.TaskKey" >
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskid != null" >
+        taskID,
+      </if>
+      <if test="taskname != null" >
+        taskName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskid != null" >
+        #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="taskname != null" >
+        #{taskname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

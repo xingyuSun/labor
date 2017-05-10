@@ -1,4 +1,4 @@
- <%@ page language="java" contentType="text/html;charset=utf-8" import="java.util.*,com.sun.pojo.*" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=utf-8" import="java.util.*,com.sun.pojo.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
@@ -44,17 +44,17 @@
 
     <jsp:include flush="true" page="../head.jsp"></jsp:include>
     <jsp:include flush="true" page="../catalog.jsp"></jsp:include>
-
+    
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                角色权限管理
+                装饰工程对应信息管理
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i>系统管理</a></li>
-                <li class="active">角色权限管理</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>装饰基础信息管理</a></li>
+                <li class="active">装饰工程对应信息管理</li>
             </ol>
         </section>
 
@@ -64,7 +64,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">权限基本信息管理</h3>
+                            <h3 class="box-title">工程基本信息列表</h3>
                         </div>
                         <div class="row">
                             <div class="margin">
@@ -86,35 +86,37 @@
                             </div>
                         </div>
                         <!-- /.box-header table-responsive mailbox-messages -->
-                        <div class="table-responsive mailbox-messages">
+                        <div class="box-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>角色编号</th>
-                                    <th>角色名称</th>
-                                    <th>权限编号</th>
-                                    <th>权限名称</th>
-                                    <th><button id="delete" type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
+                                    <th>工程编号</th>
+                                    <th>工程名称</th>
+                                    <th>项目经理</th>
+                                    <th>审计人员</th>
+                                    <th>成控部经理</th>
+                                    <th>开始时间</th>
+                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
+                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                   <c:forEach items="${listMap}" var="item">
-                                        <tr>
-                                            <td name="roleID">${item.roleID}</td>
-                                            <td>${item.roleName}</td>
-                                            <td name="rightsID">${item.rightsID}</td>
-                                            <td>${item.rightsName}</td>
-                                            <td><input type="checkbox"></td>                                  
-                                        </tr>
-                                   </c:forEach>
-                                </tbody>
+                                <tr>
+                                    <td>0001</td>
+                                    <td>香山别墅二期</td>
+                                    <td>夏真兵</td>
+                                    <td>周孟起</td>
+                                    <td>温平静</td>
+                                    <td>2009-09-03</td>
+                                   	<td><input type="radio" name="ss"></td>
+                                    <td><input name="delete" type="checkbox"></td>
+                                </tr>
+
                                 <tfoot>
                                 <tr>
-                                    <th><button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#add"  style="width: 60px">添加</button>  </th>
                                     <th>  </th>
                                     <th>  </th>
-                                    <th>  </th>
-                                    <th>  </th>
+                                    <th> <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#add"  style="width: 60px">添加</button> </th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -125,58 +127,94 @@
                 </div>
                 <!-- /.col -->
             </div>
-            <!-- /.row -->
-              <div id="add"   class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+
+            <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h4 class="modal-title">
                                 <i class="icon-pencil"></i>
-                                <span id="lblAddOneTitle" style="font-weight:bold">添加角色权限</span>
+                                <span id="lblAddOneTitle" style="font-weight:bold">添加任装饰人员对应工程信息</span>
                             </h4>
                         </div>
 
-                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="<%=request.getContextPath()%>/systemmanage/addRolerights" data-toggle="validator" enctype="multipart/form-data">
+                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="" data-toggle="validator" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="control-label col-md-2">角色名称</label>
+                                            <label class="control-label col-md-2">工程名称</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" name="rolename" style="width: 100%;">
-                                                  <c:forEach items="${listMapr}" var="item">
-
-                                                     
-                                                    <option selected="selected">${item.roleName}</option>
-
-                                                  </c:forEach>
+                                                <input id="projectname" name="projectname" type="text" class="form-control" placeholder="任务书名称..." />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">项目经理</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">现金账户</option>
+                                                    <option>银行卡/存折</option>
+                                                    <option>信用卡</option>
+                                                    <option>电子账户</option>
+                                                    <option>投资账户</option>
+                                                    <option>其他</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-2">权限名称</label>
+                                            <label class="control-label col-md-2">审计人员</label>
                                             <div class="col-md-10">
-                                               <select class="form-control select2" name="rightsname" style="width: 100%;">
-                                                    <c:forEach  items="${listMaps}" var="item">
-                                                       <option selected="selected">${item.rightsName}</option>
-                                                    </c:forEach>
+                                                <select class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">现金账户</option>
+                                                    <option>银行卡/存折</option>
+                                                    <option>信用卡</option>
+                                                    <option>电子账户</option>
+                                                    <option>投资账户</option>
+                                                    <option>其他</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">成控部经理</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">现金账户</option>
+                                                    <option>银行卡/存折</option>
+                                                    <option>信用卡</option>
+                                                    <option>电子账户</option>
+                                                    <option>投资账户</option>
+                                                    <option>其他</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">开始时间</label>
+                                            <div class="col-md-10">
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="datepicker">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" id="submit" class="btn btn-primary">确认</button>
+                                <button type="submit" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
-
+            <!-- /.row -->
         </section>
         <!-- /.content -->
 
@@ -217,6 +255,7 @@
 <!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->
 <div class="control-sidebar-bg"></div>
+</div>
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
@@ -235,6 +274,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
 
+<!-- bootstrap datepicker -->
+<script src="<%=path%>/datepicker/bootstrap-datepicker.js"></script>
 <!-- SlimScroll 1.3.0 -->
 <script src="<%=path%>/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -244,8 +285,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<%=path%>/dist/js/demo.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
+
+<script type="text/javascript" src="<%=path%>/dist/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="<%=path%>/dist/js/jquery-confirm.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {
@@ -253,90 +295,39 @@
         $('#reservation1').daterangepicker();
     });
 
-    $(function () {
-
-        //Enable iCheck plugin for checkboxes
-        //iCheck for checkbox and radio inputs
-        $('.mailbox-messages input[type="checkbox"]').iCheck({
-            checkboxClass: 'icheckbox_flat-blue',
-            radioClass: 'iradio_flat-blue'
-        });
-        
-        $("#submit").click(function(){
-        alert("删除成功");  
-            if (${insert} == "true") 
-               {
-					  alert("删除成功");    		
-            		
-         	   }
-        	 else
-               {
-         		 alert("删除失败");   
-               }  
-        });
-       
-        $("#delete").click(function(){
-            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
-                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-                //alert(n);
-                h = $(this).parents("tr").find("[name='roleID']").text();
-                s = $(this).parents("tr").find("[name='rightsID']").text();
-                //alert(h);
-            });
- 	        var jsontest={
-     			 roleid:h,
-     			 rightsid:s
-    	        };
-    	    alert(jsontest);
-               var $a = $(this);  
-               $.ajax({  
-                  url:"<%=request.getContextPath()%>/systemmanage/deleteRolerights",  
-                  type:'post',  
-                  data:jsontest,  
-                  dataType: 'json',  
-  
-        		  success:function(data){
-         		  if (data && data.success == "true") 
-         		  {
-					  alert("删除成功");    		
-            		
-         		  }
-        		   else
-         		  {
-         		  	alert("删除失败");   
-         		  }  
-        		  },        
-       			   error:function(data){              
-        		  } 
-              }); 
-            
-        });
-        
-        
-        
-        
-        
-        
-        
-        
-
-        //Enable check and uncheck all functionality
-/*         $('#1').click(function () {
-            var clicks = $(this).data('clicks');
-            if (clicks) {
-                //Uncheck all checkboxes
-                $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-                $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-            } else {
-                //Check all checkboxes
-                $(".mailbox-messages input[type='checkbox']").iCheck("check");
-                $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-            }
-            $(this).data("clicks", !clicks);
-        });
- */
+    //Date picker
+    $('#datepicker').datepicker({
+        autoclose: true
     });
 
+
+
+    $(document).ready(function() {
+        $('#addfrom')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    'projectname': {
+                        validators: {
+                            notEmpty: {
+                                message: '不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 10,
+                                message: '不超过十个字符'
+                            }
+                        }
+                    }
+                }
+            });
+    });
 </script>
 </body>
 </html>
+    

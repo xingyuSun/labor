@@ -19,6 +19,7 @@
     insert into rolerights (roleID, rightsID)
     values (#{roleid,jdbcType=INTEGER}, #{rightsid,jdbcType=INTEGER})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.sun.pojo.rolerightsKey" >
     insert into rolerights
     <trim prefix="(" suffix=")" suffixOverrides="," >

@@ -33,10 +33,10 @@ public class SystemManageController {
 		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
 		ModelAndView m = new ModelAndView("systemmanage/rolemanagement");
 		List<Map<String,Object>> mapList=roleService.getRole();
-		for(int i=0;i<mapList.size();i++){
-			System.out.println(mapList.get(i).get("roleID"));
-			System.out.println(mapList.get(i).get("roleName"));
-		}
+//		for(int i=0;i<mapList.size();i++){
+//			System.out.println(mapList.get(i).get("roleID"));
+//			System.out.println(mapList.get(i).get("roleName"));
+//		}
 		m.addObject("nameAndID", nameAndID);
 		m.addObject("listMap", mapList);
 		return m;
@@ -69,8 +69,8 @@ public class SystemManageController {
 		String id=(String)session.getAttribute("userID");
 		int ID=Integer.parseInt(id);
 		//rolerightsKey.setUserID(ID);
-		System.out.println(rolerightsKey.getRoleid());
-		System.out.println(rolerightsKey.getRightsid());
+		//System.out.println(rolerightsKey.getRoleid());
+		//System.out.println(rolerightsKey.getRightsid());
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(roleRightsService.deleteRoleRights(rolerightsKey))
 		{
@@ -103,7 +103,7 @@ public class SystemManageController {
 		rolerightsKey rolerights=new rolerightsKey();
 		rolerights.setRoleid(roleService.getIDByName(rolename));
 		rolerights.setRightsid(roleRightsService.getIDByName(rightsname));
-		System.out.println(rolerights.getRoleid());
+		//System.out.println(rolerights.getRoleid());
 	    if(roleRightsService.insertRoleRights(rolerights))
 	    {
 	    	m.addObject("insert", true);
@@ -133,8 +133,8 @@ public class SystemManageController {
 		//boolean flg=service.checkAccountName(incomeAndExpenditure);
 		List<Map<String,Object>> mapList=roleService.getRole();
 		for(int i=0;i<mapList.size();i++){
-			System.out.println(mapList.get(i).get("roleID"));
-			System.out.println(mapList.get(i).get("roleName"));
+			//System.out.println(mapList.get(i).get("roleID"));
+			//System.out.println(mapList.get(i).get("roleName"));
 		}
 		map.put("data",mapList);
 		/*if(service.getRole(ID))

@@ -45,7 +45,7 @@ public class UserController {
 			//map.put("userName", name);
 			//map.put("userID", String.valueOf(ID));			
 			//System.out.println(user.getLoginname());
-			ModelAndView m = new ModelAndView("redirect:/systemmanage/rolerightsmanagement");
+			ModelAndView m = new ModelAndView("redirect:/systemmanage/rolemanagement");
 			//m.addObject("map", map);
 			session.setAttribute("userID", String.valueOf(ID));
 			session.setAttribute("userName", name);

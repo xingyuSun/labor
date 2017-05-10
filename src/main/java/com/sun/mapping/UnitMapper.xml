@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.UnitDao" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.UnitKey" >
+    <id column="unitID" property="unitid" jdbcType="INTEGER" />
+    <id column="unitName" property="unitname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="checkUnit" parameterType="com.sun.pojo.UnitKey"  resultType="com.sun.pojo.UnitKey">
+     select * from unit where   unitID = #{unitid,jdbcType=INTEGER}
+  </select> 
+   
+  <select id="getUnit"  resultType="java.util.HashMap">
+     select * from unit
+  </select>
+  
+  <update id="changeUnit"  parameterType="com.sun.pojo.UnitKey">
+     update unit set unitName = #{unitname,jdbcType=VARCHAR} where unitID = #{unitid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.UnitKey" >
+    delete from unit
+    where unitID = #{unitid,jdbcType=INTEGER}
+      and unitName = #{unitname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.UnitKey" >
+    insert into unit (unitID, unitName)
+    values (#{unitid,jdbcType=INTEGER}, #{unitname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.UnitKey" >
+    insert into unit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unitid != null" >
+        unitID,
+      </if>
+      <if test="unitname != null" >
+        unitName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unitid != null" >
+        #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="unitname != null" >
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

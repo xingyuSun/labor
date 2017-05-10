@@ -44,17 +44,17 @@
 
     <jsp:include flush="true" page="../head.jsp"></jsp:include>
     <jsp:include flush="true" page="../catalog.jsp"></jsp:include>
-
-    <!-- Content Wrapper. Contains page content -->
+    
+        <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                角色管理
+                分部标准（分部）
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i>系统管理</a></li>
-                <li class="active">角色管理</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>装饰基础信息管理</a></li>
+                <li class="active">分部标准（分部）</li>
             </ol>
         </section>
 
@@ -64,52 +64,36 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">角色基本信息</h3>
+                            <h3 class="box-title">分布基本信息列表</h3>
                         </div>
-                        <div class="row">
-                            <div class="margin">
-                                <div class="col-md-4">
-                                    <!-- Date range -->
-                                    <div class="form-group">
-                                        <label>Date range:</label>
 
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right" id="reservation1">
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
-                                    <!-- /.form group -->
-                                </div>
-                            </div>
-                        </div>
                         <!-- /.box-header table-responsive mailbox-messages -->
                         <div class="box-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>角色编号</th>
-                                    <th>角色名称</th>
-                                    <th>角色备注</th>
-                                    <th><button type="button" id="change" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
-                                    <th><button type="button" id="delete" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
+                                    <th>分部编号</th>
+                                    <th>分部名</th>
+                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
+                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                	 <c:forEach items="${listMap}" var="item">
-                                     	<tr>
-                                   			<td name="id">${item.roleID}</td>
-                                   			<td>${item.roleName}</td>
-                                   			<td>${item.roleRemarks}</td>
-                                   			<td><input type="radio" name="ss"></td>
-                                            <td><input name="delete" type="checkbox"></td>
-                                     	</tr>
-                                     </c:forEach>
-                                </tbody>
+                                <tr>
+                                    <td>0001</td>
+                                    <td>基础土石方</td>
+                                   	<td><input type="radio" name="ss"></td>
+                                    <td><input name="delete" type="checkbox"></td>
+                                </tr>
+
+                                <tfoot>
+                                <tr>
+                                    <th>  </th>
+                                    <th>  </th>
+                                    <th> <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#add"  style="width: 60px">添加</button> </th>
+                                </tr>
+                                </tfoot>
                             </table>
-                            
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -117,9 +101,45 @@
                 </div>
                 <!-- /.col -->
             </div>
-            
+
+
+
+            <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">
+                                <i class="icon-pencil"></i>
+                                <span id="AddTitle" style="font-weight:bold">添加分布标准信息</span>
+                            </h4>
+                        </div>
+
+                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">分部名称</label>
+                                            <div class="col-md-10">
+                                                <input id="divisionname" name="divisionname" type="text" class="form-control" placeholder="分部名称..." />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary">确认</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
             <!-- /.row -->
         </section>
+        <!-- /.content -->
 
     </div>
 
@@ -158,7 +178,7 @@
 <!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->
 <div class="control-sidebar-bg"></div>
-
+</div>
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
@@ -188,38 +208,42 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
+
+<script type="text/javascript" src="<%=path%>/dist/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="<%=path%>/dist/js/jquery-confirm.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {
         $("#example1").DataTable();
         $('#reservation1').daterangepicker();
-        
+    });
 
+    $(document).ready(function() {
+        $('#addfrom')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    'divisionname': {
+                        validators: {
+                            notEmpty: {
+                                message: '不能为空'
 
-        $("#change").click(function(){
-
-        
-            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
-                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-                //alert(n);
-                h = $(this).parents("tr").find("[name='id']").text();
-                alert(h);
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 10,
+                                message: '不超过十个字符'
+                            }
+                        }
+                    }
+                }
             });
-                //$("#example1").find("tr:eq("+n+")").remove();
-        });
-       
-
-        $("#delete").click(function(){
-            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
-                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-                //alert(n);
-                h = $(this).parents("tr").find("[name='id']").text();
-                alert(h);
-            });
-        });
-
-   });
-
+    });
 
 
 

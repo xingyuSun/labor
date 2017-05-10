@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.SettlementUnitDao" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.SettlementUnitKey" >
+    <id column="settlementUnitID" property="settlementunitid" jdbcType="INTEGER" />
+    <id column="settlementUnitName" property="settlementunitname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <select id="checkSettlementUnit" parameterType="com.sun.pojo.SettlementUnitKey"  resultType="com.sun.pojo.SettlementUnitKey">
+     select * from settlementunit where   settlementunitID = #{settlementunitid,jdbcType=INTEGER}
+  </select> 
+   
+  <select id="getSettlementUnit"  resultType="java.util.HashMap">
+     select * from settlementunitunit
+  </select>
+  
+  <update id="changeSettlementUnit"  parameterType="com.sun.pojo.SettlementUnitKey">
+     update settlementunit set settlementunitName = #{settlementunitname,jdbcType=VARCHAR} where settlementunitID = #{settlementunitid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.SettlementUnitKey" >
+    delete from settlementunit
+    where settlementUnitID = #{settlementunitid,jdbcType=INTEGER}
+      and settlementUnitName = #{settlementunitname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.SettlementUnitKey" >
+    insert into settlementunit (settlementUnitID, settlementUnitName
+      )
+    values (#{settlementunitid,jdbcType=INTEGER}, #{settlementunitname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.SettlementUnitKey" >
+    insert into settlementunit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="settlementunitid != null" >
+        settlementUnitID,
+      </if>
+      <if test="settlementunitname != null" >
+        settlementUnitName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="settlementunitid != null" >
+        #{settlementunitid,jdbcType=INTEGER},
+      </if>
+      <if test="settlementunitname != null" >
+        #{settlementunitname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
