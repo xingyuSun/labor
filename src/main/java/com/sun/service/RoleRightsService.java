@@ -14,9 +14,11 @@ public interface RoleRightsService {
 	
 	public List<Map<String,Object>> getRights();
 	
+	public int getIDByName(String rightesname);
+	
 	public boolean deleteRoleRights(rolerightsKey rolerightsKey);
 	
-	public boolean insertRoleRights(String rolename,String rightsname);
+	public boolean insertRoleRights(rolerightsKey rolerightsKey);
 	
 	
 }

@@ -8,9 +8,11 @@ public interface RoleRightsDao {
 	
     public void deleteByPrimaryKey(rolerightsKey key);
 
-    public void insertRoleRights(@Param("rolename")String rolename, @Param("rightsname")String rightsname);
+   // public void insertRoleRights(@Param("roleid")int roleid, @Param("rightsid")int rightsid);
     
-    int insert(rolerightsKey record);
+    public rolerightsKey getRoleRights();
+    
+    boolean insert(rolerightsKey rolerightsKey);
 
     int insertSelective(rolerightsKey record);
 }

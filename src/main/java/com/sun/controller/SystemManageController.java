@@ -23,13 +23,10 @@ import com.sun.service.RoleRightsService;
 @Controller
 @RequestMapping("/systemmanage")
 public class SystemManageController {
-
 	@Resource
 	private RoleService roleService;
 	@Resource
 	private RoleRightsService roleRightsService;
-	
-	
 	@RequestMapping("/rolemanagement")
 	public ModelAndView RoleManagement(HttpSession session){
 		Map nameAndID=getNameAndID(session);
@@ -100,13 +97,24 @@ public class SystemManageController {
 		String id=(String)session.getAttribute("userID");
 		int ID=Integer.parseInt(id);
 		//rolerightsKey.setUserID(ID);
+		ModelAndView m = new ModelAndView("redirect:/systemmanage/rolerightsmanagement");
 		String rolename =new String((request.getParameter("rolename")).getBytes("iso-8859-1"),"utf-8");
 		String rightsname =new String((request.getParameter("rightsname")).getBytes("iso-8859-1"),"utf-8");
-		System.out.println(rolename);
-		System.out.println(rightsname);
-		roleRightsService.insertRoleRights(rolename,rightsname);
-		ModelAndView m = new ModelAndView("redirect:/systemmanage/rolerightsmanagement");
-		return m;
+		rolerightsKey rolerights=new rolerightsKey();
+		rolerights.setRoleid(roleService.getIDByName(rolename));
+		rolerights.setRightsid(roleRightsService.getIDByName(rightsname));
+		System.out.println(rolerights.getRoleid());
+	    if(roleRightsService.insertRoleRights(rolerights))
+	    {
+	    	m.addObject("insert", true);
+		    return m;
+	    }
+	    else
+	    {
+	    	m.addObject("insert", false);
+	    	return m;
+	    }
+	
 	}
 	
 	

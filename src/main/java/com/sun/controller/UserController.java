@@ -27,14 +27,6 @@ public class UserController {
    }
 	
 	
-	@RequestMapping("/showUser")
-	public String toIndex(HttpServletRequest request,Model model){
-		int userId = Integer.parseInt(request.getParameter("id"));
-		User user = this.userService.getUserById(userId);
-		model.addAttribute("user", user);
-		return "showUser";
-	}
-	
 	@RequestMapping("/register")
 	public ModelAndView Register()
 	{
@@ -43,9 +35,9 @@ public class UserController {
 	
 	@RequestMapping("/checklogin")
 	public ModelAndView CheckLogin(User user,HttpSession session){
+		System.out.println("成功"+user.getPassword());
 		boolean flg=userService.userCheckUser(user);
 		if(flg) {
-
 			User u= userService.getUserByLoginName(user.getLoginname());
 			String name=u.getLoginname(); 
 			int ID = u.getUserid();			

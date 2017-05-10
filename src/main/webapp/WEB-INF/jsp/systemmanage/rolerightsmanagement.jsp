@@ -308,7 +308,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" class="btn btn-primary">确认</button>
+                                <button type="submit" id="submit" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
@@ -401,6 +401,18 @@
             radioClass: 'iradio_flat-blue'
         });
         
+        $("#submit").click(function(){
+        alert("删除成功");  
+            if (${insert} == "true") 
+               {
+					  alert("删除成功");    		
+            		
+         	   }
+        	 else
+               {
+         		 alert("删除失败");   
+               }  
+        });
        
         $("#delete").click(function(){
             $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox

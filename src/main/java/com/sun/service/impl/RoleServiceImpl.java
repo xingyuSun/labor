@@ -28,4 +28,10 @@ public class RoleServiceImpl implements RoleService {
 		return this.RoleDao.getRole();
 	}
 	
+	@Override
+	public int getIDByName(String rolename) {
+		// TODO Auto-generated method stub
+		return this.RoleDao.getIDByName(rolename);
+	}
+	
 }

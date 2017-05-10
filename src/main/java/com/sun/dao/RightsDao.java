@@ -10,6 +10,8 @@ public interface RightsDao {
 	
 	public List<Map<String,Object>> getRights();
 	
+    int getIDByName(String rightsname);
+	
     int deleteByPrimaryKey(Integer rightsid);
 
     int insert(Rights record);

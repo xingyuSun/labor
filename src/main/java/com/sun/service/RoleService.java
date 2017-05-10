@@ -10,6 +10,7 @@ public interface RoleService {
 
 	public List<Map<String,Object>> getRole();
 	
+	public int getIDByName(String rolename);
 	
 	public Role getRoleByuserId(int userId);
 	

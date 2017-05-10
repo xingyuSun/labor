@@ -10,6 +10,11 @@
     roleID, roleName, roleRemarks
   </sql>
   
+  
+  <select id="getIDByName" parameterType="java.lang.String"  resultType="java.lang.Integer">
+     select roleID  from role where roleName = #{rolename}
+  </select>
+  
   <select id="getRole"  resultType="java.util.HashMap">
      select * from role
   </select>

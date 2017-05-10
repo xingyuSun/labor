@@ -9,6 +9,10 @@
     rightsID, rightsName
   </sql>
   
+  <select id="getIDByName" parameterType="java.lang.String"  resultType="java.lang.Integer">
+     select rightsID  from rights where rightsName = #{rightsname}
+  </select>
+  
    <select id="getUserRights"  resultType="java.util.HashMap">
      select * from role u,rights r,rolerights s where u.roleID=s.roleID and s.rightsID=r.rightsID
   </select>

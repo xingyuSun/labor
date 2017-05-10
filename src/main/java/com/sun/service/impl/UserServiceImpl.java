@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
 		if(user==null) return false;
 		
 		User u=userDao.selectByloginname(user.getLoginname());
-		//����ֵΪ������ݿ��в�����ʹ�ø�������û�
 		if(u==null) return true;
 		return false;
 	}
@@ -50,6 +49,5 @@ public class UserServiceImpl implements UserService {
 	
 	
 
-	
 	
 }

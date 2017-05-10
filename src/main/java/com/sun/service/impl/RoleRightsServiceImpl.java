@@ -21,6 +21,13 @@ public class RoleRightsServiceImpl implements RoleRightsService {
 	private RoleRightsDao RoleRightsDao;
 
 	@Override
+	public int getIDByName(String rightsname) {
+		// TODO Auto-generated method stub
+		return this.RightsDao.getIDByName(rightsname);
+	}
+	
+	
+	@Override
 	public List<Map<String, Object>> getRoleRights() {
 		// TODO Auto-generated method stub
 		return this.RightsDao.getUserRights();
@@ -40,10 +47,12 @@ public class RoleRightsServiceImpl implements RoleRightsService {
 	}
 	
 	@Override
-	public boolean  insertRoleRights(String rolename,String rightsname) {
+	public boolean  insertRoleRights(rolerightsKey rolerightsKey) {
 		// TODO Auto-generated method stub
-		RoleRightsDao.insertRoleRights(rolename,rightsname);
-		return true;
+		if(RoleRightsDao.insert(rolerightsKey))
+		  return true;
+		else
+		  return false;
 	}
 	
 }

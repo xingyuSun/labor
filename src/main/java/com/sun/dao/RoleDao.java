@@ -9,6 +9,8 @@ public interface RoleDao {
 	public List<Map<String,Object>> getRole();
 	
     int deleteByPrimaryKey(Integer roleid);
+    
+    int getIDByName(String rolename);
 
     int insert(Role record);
 

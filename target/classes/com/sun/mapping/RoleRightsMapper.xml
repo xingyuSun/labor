@@ -6,19 +6,14 @@
     <id column="rightsID" property="rightsid" jdbcType="INTEGER" />
   </resultMap>
   
-   <insert id="insertRoleRights">
-    insert into rolerights (roleID, rightsID) 
-    select roleID,rightsID from role,rights where roleName=#{rolename} and rightsName=#{rightsname}
-  </insert>
-  
-  
-  
   
   <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.rolerightsKey" >
     delete from rolerights where roleID = #{roleid} and rightsID = #{rightsid}
   </delete>
   
-  
+  <select id="getRoleRights"  resultType="java.util.HashMap">
+     select * from rolerights
+  </select>
   
   <insert id="insert" parameterType="com.sun.pojo.rolerightsKey" >
     insert into rolerights (roleID, rightsID)
