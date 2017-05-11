@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.pojo.SettlementUnitKey;
 import com.sun.pojo.TaskKey;
 import com.sun.pojo.UnitKey;
 import com.sun.pojo.rolerightsKey;
@@ -186,15 +187,71 @@ public class DecorationInfoController {
 		Map nameAndID=getNameAndID(session);
 		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
 		ModelAndView m = new ModelAndView("decorationinfo/settlementunit");
-//		List<Map<String,Object>> mapList=roleService.getRole();
-//		for(int i=0;i<mapList.size();i++){
-//			System.out.println(mapList.get(i).get("roleID"));
-//			System.out.println(mapList.get(i).get("roleName"));
-//		}
-//		m.addObject("nameAndID", nameAndID);
-//		m.addObject("listMap", mapList);
+		List<Map<String,Object>> mapList=settlementUnitService.getSettlementUnit();
+		m.addObject("listMap", mapList);
 		return m;
 	}
+	
+	
+	
+	@RequestMapping(value="/deleteSettlementUnit",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doDeleteSettlementUnit(SettlementUnitKey SettlementUnitKey,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(SettlementUnitKey.getSettlementunitid());
+		System.out.println(SettlementUnitKey.getSettlementunitname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(settlementUnitService.deleteByPrimaryKey(SettlementUnitKey))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/addSettlementUnit",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doAddSettlementUnit(SettlementUnitKey SettlementUnitKey,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(SettlementUnitKey.getSettlementunitid());
+		System.out.println(SettlementUnitKey.getSettlementunitname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(settlementUnitService.insert(SettlementUnitKey))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/changeSettlementUnit",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doChangeSettlementUnit(SettlementUnitKey SettlementUnitKey,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(SettlementUnitKey.getSettlementunitid());
+		System.out.println(SettlementUnitKey.getSettlementunitname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(settlementUnitService.changeSettlementUnit(SettlementUnitKey))
+	    	map.put("success", "true");
+	    
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+
+	
+	
+	
+	
 	
 	
 	

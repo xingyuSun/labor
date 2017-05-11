@@ -8,7 +8,9 @@ import com.sun.pojo.TaskKey;
 public interface TaskDao {
 	
 	
-	public TaskKey checkTask(TaskKey TaskKey);
+	public List<Map<String,Object>> checkTask(TaskKey TaskKey);
+	
+	public List<Map<String,Object>> checkChange(TaskKey TaskKey);
 	
 	public List<Map<String,Object>> getTask();
 	

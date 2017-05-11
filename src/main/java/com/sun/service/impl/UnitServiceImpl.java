@@ -26,6 +26,15 @@ public class UnitServiceImpl implements UnitService {
 		else
 		   return false;
 	}
+	
+	@Override
+	public boolean checkChange(UnitKey UnitKey) {
+		// TODO Auto-generated method stub
+		if(this.UnitDao.checkUnit(UnitKey)==null)
+		   return true;
+		else
+		   return false;
+	}
 
 	@Override
 	public List<Map<String, Object>> getUnit() {
@@ -36,10 +45,14 @@ public class UnitServiceImpl implements UnitService {
 	@Override
 	public boolean changeUnit(UnitKey UnitKey) {
 		// TODO Auto-generated method stub
-		if(this.UnitDao.changeUnit(UnitKey))
-		   return true;
-	    else
-		   return false;
+		if(checkChange(UnitKey)){
+			  if(this.UnitDao.changeUnit(UnitKey))
+				return true;
+			  else
+				return false;
+			}
+			else
+			return false;
 	}
 
 	@Override

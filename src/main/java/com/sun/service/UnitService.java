@@ -9,6 +9,8 @@ public interface UnitService {
 
 	public boolean checkUnit(UnitKey UnitKey);
 	
+	public boolean checkChange(UnitKey UnitKey);
+	
 	public List<Map<String,Object>> getUnit();
 	
 	public boolean changeUnit(UnitKey UnitKey);

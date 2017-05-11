@@ -6,13 +6,18 @@
     <id column="taskName" property="taskname" jdbcType="VARCHAR" />
   </resultMap>
    
-  <select id="checkTask" parameterType="com.sun.pojo.TaskKey"  resultType="com.sun.pojo.TaskKey">
+  <select id="checkTask" parameterType="com.sun.pojo.TaskKey"  resultType="java.util.HashMap">
      select * from task where  taskID = #{taskid,jdbcType=INTEGER} or taskName = #{taskname,jdbcType=VARCHAR}
   </select> 
    
+  <select id="checkChange"  parameterType="com.sun.pojo.TaskKey" resultType="java.util.HashMap" >
+     select * from task where taskName = #{taskname,jdbcType=VARCHAR}
+  </select>
+ 
   <select id="getTask"  resultType="java.util.HashMap">
      select * from task
   </select>
+  
   
   <update id="changeTask"  parameterType="com.sun.pojo.TaskKey">
      update task set taskName = #{taskname,jdbcType=VARCHAR} where taskID = #{taskid,jdbcType=INTEGER}

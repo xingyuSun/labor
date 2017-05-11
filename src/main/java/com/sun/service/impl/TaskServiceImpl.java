@@ -26,6 +26,15 @@ public class TaskServiceImpl implements TaskService {
 		else
 		   return false;
 	}
+	
+	@Override
+	public boolean checkChange(TaskKey TaskKey) {
+		// TODO Auto-generated method stub
+		if(this.TaskDao.checkTask(TaskKey)==null)
+		   return true;
+		else
+		   return false;
+	}
 
 	@Override
 	public List<Map<String, Object>> getTask() {
@@ -36,11 +45,19 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public boolean changeTask(TaskKey TaskKey) {
 		// TODO Auto-generated method stub
-		if(this.TaskDao.changeTask(TaskKey))
-		   return true;
-	    else
-		   return false;
+		if(checkChange(TaskKey)){
+			  if(this.TaskDao.changeTask(TaskKey))
+				return true;
+			  else
+				return false;
+			}
+			else
+			return false;
+		
+		
 	}
+	
+	
 
 	@Override
 	public boolean deleteByPrimaryKey(TaskKey TaskKey) {

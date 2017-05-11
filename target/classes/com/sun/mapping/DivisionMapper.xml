@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.DivisionMapper" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.DivisionKey" >
+    <id column="divisionID" property="divisionid" jdbcType="INTEGER" />
+    <id column="divisionName" property="divisionname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  
+  <select id="checkDivision" parameterType="com.sun.pojo.DivisionKey"  resultType="java.util.HashMap">
+     select * from division where  divisionID = #{divisionid,jdbcType=INTEGER} or divisionName = #{divisionname,jdbcType=VARCHAR}
+  </select> 
+   
+  <select id="checkChange"  parameterType="com.sun.pojo.DivisionKey" resultType="java.util.HashMap" >
+     select * from division where divisionName = #{divisionname,jdbcType=VARCHAR}
+  </select>
+   
+  <select id="getDivision"  resultType="java.util.HashMap">
+     select * from division
+  </select>
+  
+  <update id="changeDivision"  parameterType="com.sun.pojo.DivisionKey">
+     update division set divisionName = #{divisionname,jdbcType=VARCHAR} where divisionID = #{divisionid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.DivisionKey" >
+    delete from division
+    where divisionID = #{divisionid,jdbcType=INTEGER}
+      and divisionName = #{divisionname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.DivisionKey" >
+    insert into division (divisionID, divisionName)
+    values (#{divisionid,jdbcType=INTEGER}, #{divisionname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.DivisionKey" >
+    insert into division
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="divisionid != null" >
+        divisionID,
+      </if>
+      <if test="divisionname != null" >
+        divisionName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="divisionid != null" >
+        #{divisionid,jdbcType=INTEGER},
+      </if>
+      <if test="divisionname != null" >
+        #{divisionname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -26,7 +26,16 @@ public class SettlementUnitServiceImpl implements SettlementUnitService {
 		else
 		   return false;
 	}
-
+	
+	@Override
+	public boolean checkChange(SettlementUnitKey SettlementUnitKey) {
+		// TODO Auto-generated method stub
+		if(this.SettlementUnitDao.checkSettlementUnit(SettlementUnitKey)==null)
+		   return true;
+		else
+		   return false;
+	}
+	
 	@Override
 	public List<Map<String, Object>> getSettlementUnit() {
 		// TODO Auto-generated method stub
@@ -36,10 +45,15 @@ public class SettlementUnitServiceImpl implements SettlementUnitService {
 	@Override
 	public boolean changeSettlementUnit(SettlementUnitKey SettlementUnitKey) {
 		// TODO Auto-generated method stub
-		if(this.SettlementUnitDao.changeSettlementUnit(SettlementUnitKey))
-		   return true;
-	    else
-		   return false;
+		if(checkChange(SettlementUnitKey)){
+		  if(this.SettlementUnitDao.changeSettlementUnit(SettlementUnitKey))
+			return true;
+		  else
+			return false;
+		}
+		else
+		return false;
+		
 	}
 
 	@Override

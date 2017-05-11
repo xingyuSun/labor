@@ -6,7 +6,9 @@ import java.util.Map;
 import com.sun.pojo.UnitKey;
 
 public interface UnitDao {
-	public UnitKey checkUnit(UnitKey UnitKey);
+	public List<Map<String,Object>> checkUnit(UnitKey UnitKey);
+	
+	public List<Map<String,Object>> checkChange(UnitKey UnitKey);
 	
 	public List<Map<String,Object>> getUnit();
 	

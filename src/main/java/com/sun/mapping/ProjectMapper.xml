@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.Project" >
+    <id column="projectID" property="projectid" jdbcType="INTEGER" />
+    <id column="projectName" property="projectname" jdbcType="VARCHAR" />
+    <result column="projectManager" property="projectmanager" jdbcType="VARCHAR" />
+    <result column="auditor" property="auditor" jdbcType="VARCHAR" />
+    <result column="controlManager" property="controlmanager" jdbcType="VARCHAR" />
+    <result column="beginTime" property="begintime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    projectID, projectName, projectManager, auditor, controlManager, beginTime
+  </sql>
+  
+  <select id="checkProject" parameterType="com.sun.pojo.Project"  resultType="java.util.HashMap">
+     select * from project where  projectID = #{projectid,jdbcType=INTEGER} or projectName = #{projectname,jdbcType=VARCHAR}
+  </select> 
+   
+  <select id="getProject"  resultType="java.util.HashMap">
+     select * from project
+  </select>
+  
+  <select id="checkChange"  parameterType="com.sun.pojo.Project" resultType="java.util.HashMap" >
+     select * from project where projectName = #{projectname,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="changeProject" parameterType="test.pojo.Project" >
+    update project
+    set projectName = #{projectname,jdbcType=VARCHAR},
+       projectManager = #{projectmanager,jdbcType=VARCHAR},
+      auditor = #{auditor,jdbcType=VARCHAR},
+      controlManager = #{controlmanager,jdbcType=VARCHAR},
+      beginTime = #{begintime,jdbcType=VARCHAR}
+    where projectID = #{projectid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sun.pojo.Project" >
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where projectID = #{projectid,jdbcType=INTEGER}
+      and projectName = #{projectname,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.Project" >
+    delete from project
+    where projectID = #{projectid,jdbcType=INTEGER}
+      and projectName = #{projectname,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.sun.pojo.Project" >
+    insert into project (projectID, projectName, projectManager, 
+      auditor, controlManager, beginTime
+      )
+    values (#{projectid,jdbcType=INTEGER}, #{projectname,jdbcType=VARCHAR}, #{projectmanager,jdbcType=VARCHAR}, 
+      #{auditor,jdbcType=VARCHAR}, #{controlmanager,jdbcType=VARCHAR}, #{begintime,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sun.pojo.Project" >
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        projectID,
+      </if>
+      <if test="projectname != null" >
+        projectName,
+      </if>
+      <if test="projectmanager != null" >
+        projectManager,
+      </if>
+      <if test="auditor != null" >
+        auditor,
+      </if>
+      <if test="controlmanager != null" >
+        controlManager,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectmanager != null" >
+        #{projectmanager,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="controlmanager != null" >
+        #{controlmanager,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="test.pojo.Project" >
+    update project
+    <set >
+      <if test="projectmanager != null" >
+        projectManager = #{projectmanager,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        auditor = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="controlmanager != null" >
+        controlManager = #{controlmanager,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where projectID = #{projectid,jdbcType=INTEGER}
+      and projectName = #{projectname,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="test.pojo.Project" >
+    update project
+    set projectManager = #{projectmanager,jdbcType=VARCHAR},
+      auditor = #{auditor,jdbcType=VARCHAR},
+      controlManager = #{controlmanager,jdbcType=VARCHAR},
+      beginTime = #{begintime,jdbcType=VARCHAR}
+    where projectID = #{projectid,jdbcType=INTEGER}
+      and projectName = #{projectname,jdbcType=VARCHAR}
+  </update>
+</mapper>

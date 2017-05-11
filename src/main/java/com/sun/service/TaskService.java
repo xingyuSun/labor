@@ -10,6 +10,8 @@ public interface TaskService {
 
 	public boolean checkTask(TaskKey TaskKey);
 	
+	public boolean checkChange(TaskKey TaskKey);
+	
 	public List<Map<String,Object>> getTask();
 	
 	public boolean changeTask(TaskKey TaskKey);

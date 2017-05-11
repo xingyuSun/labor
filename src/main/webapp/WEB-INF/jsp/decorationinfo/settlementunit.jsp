@@ -74,23 +74,25 @@
                                 <tr>
                                     <th>结算单位编号</th>
                                     <th>结算单位名</th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
+                                    <th><button type="button" id="changemodal" class="btn btn-block btn-info"   style="width: 60px">修改</button></th>
+                                    <th><button type="button" id="delete" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>0225</td>
-                                    <td>报销已付</td>
-                                   	<td><input type="radio" name="ss"></td>
-                                    <td><input name="delete" type="checkbox"></td>
-                                </tr>
-
+                                	 <c:forEach items="${listMap}" var="item">
+                                     	<tr>
+                                   			<td name="settlementUnitID">${item.settlementUnitID}</td>
+                                   			<td name="settlementUnitName">${item.settlementUnitName}</td>
+                                   			<td><input type="radio" name="ss"></td>
+                                            <td><input type="checkbox"></td>
+                                     	</tr>
+                                     </c:forEach>
+                                </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>  </th>
                                     <th>  </th>
-                                    <th> <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#add"  style="width: 60px">添加</button> </th>
+                                    <th> <button type="button" class="btn btn-block btn-info" id="addmodal"  style="width: 60px">添加</button> </th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -120,9 +122,17 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label class="control-label col-md-2">结算单位编号</label>
+                                            <div class="col-md-10">
+                                                <input id="settlementunitidadd" name="settlementunitname" type="text" class="form-control" placeholder="结算单位编号..." />
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label class="control-label col-md-2">结算单位名称</label>
                                             <div class="col-md-10">
-                                                <input id="settlementunitname" name="settlementunitname" type="text" class="form-control" placeholder="结算单位名称..." />
+                                                <input id="settlementunitnameadd" name="settlementunitname" type="text" class="form-control" placeholder="结算单位名称..." />
                                             </div>
                                         </div>
                                     </div>
@@ -130,13 +140,54 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" class="btn btn-primary">确认</button>
+                                <button type="button" id="addsettlementunit" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
+            
+            
+            <div id="change" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">
+                                <i class="icon-pencil"></i>
+                                <span id="lblAddOneTitle" style="font-weight:bold">修改结算单位</span>
+                            </h4>
+                        </div>
+
+
+                        <form class="form-horizontal form-bordered form-row-strippe" id="changefrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">结算单位名称</label>
+                                            <div class="col-md-10">
+                                                <input id="settlementunitnamechange" type="text" class="form-control" placeholder="结算单位名称..." />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" id="changesettlementunit" class="btn btn-primary">确认</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>            
+            
+            
+            
+            
+            
             <!-- /.row -->
         </section>
         <!-- /.content -->
@@ -217,6 +268,143 @@
         $("#example1").DataTable();
         $('#reservation1').daterangepicker();
     });
+
+
+  $(function () {
+  
+          $("#changemodal").click(function(){
+
+                $("#change").modal();
+                //document.getElementById('settlementunitbookid').value = h;
+                //$("#identifier").modal();  
+          });
+          
+            $("#addmodal").click(function(){
+                $("#add").modal();
+            });
+  
+  
+
+          
+          
+         $("#changesettlementunit").click(function(){
+            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                //alert(n);
+                h = $(this).parents("tr").find("[name='settlementUnitID']").text();
+                s = $(this).parents("tr").find("[name='settlementUnitName']").text();
+                //alert(h);
+            });     
+            
+ 	        var jsontest={
+     			 settlementunitid:h,
+     			 settlementunitname:$("#settlementunitnamechange").val()
+    	        };
+               var $a = $(this);  
+               $.ajax({  
+                  url:"<%=request.getContextPath()%>/decorationinfo/changeSettlementUnit",  
+                  type:'post',  
+                  data:jsontest,  
+                  dataType: 'json',  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("修改成功");    		
+            		
+         		  }
+        		   else
+         		  {
+         		  	alert("修改失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+            
+        });
+  
+  
+          $("#addsettlementunit").click(function(){
+   
+    	    var jsontest={
+     			 settlementunitid:$("#settlementunitidadd").val(),
+     			 settlementunitname:$("#settlementunitnameadd").val()
+    	        };
+
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/addSettlementUnit",  
+                  type:"post",  
+                  //data:$.toJSON(settlementunitArray),  
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("添加成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("添加失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+
+  
+            
+           
+
+        $("#delete").click(function(){
+          var settlementunitArray = new Array();
+            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                
+                h = $(this).parents("tr").find("[name='settlementUnitID']").text();
+                s = $(this).parents("tr").find("[name='settlementUnitName']").text();
+                
+                settlementunitArray.push({settlementunitid: h, settlementunitname: s});
+    	   });
+    	    var jsontest={
+     			 settlementunitid:h,
+     			 settlementunitname:s
+    	        };
+    	        var $a = $(this);  
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/deleteSettlementUnit",  
+                  type:"post",  
+                  //data:$.toJSON(settlementunitArray),  
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("删除成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("删除失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+          });
+
+ 
+
+
+
+
+
+
+
+
 
     $(document).ready(function() {
         $('#addfrom')

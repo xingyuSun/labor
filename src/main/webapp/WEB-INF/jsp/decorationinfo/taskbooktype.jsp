@@ -178,7 +178,7 @@
                             </h4>
                         </div>
 
-                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                        <form class="form-horizontal form-bordered form-row-strippe" id="changefrom" action="" data-toggle="validator" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">

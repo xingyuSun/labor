@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.WorkProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.WorkProject" >
+    <id column="workProjectID" property="workprojectid" jdbcType="INTEGER" />
+    <id column="workProjectName" property="workprojectname" jdbcType="VARCHAR" />
+    <result column="workProjectParts" property="workprojectparts" jdbcType="VARCHAR" />
+    <result column="unitID" property="unitid" jdbcType="INTEGER" />
+    <result column="workProjectRemarks" property="workprojectremarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    workProjectID, workProjectName, workProjectParts, unitID, workProjectRemarks
+  </sql>
+  
+  <select id="checkWorkProject" parameterType="com.sun.pojo.WorkProject"  resultType="java.util.HashMap">
+     select * from workproject where  workprojectID = #{workprojectid,jdbcType=INTEGER} or workprojectName = #{workprojectname,jdbcType=VARCHAR}
+  </select> 
+   
+  <select id="checkChange"  parameterType="com.sun.pojo.WorkProject" resultType="java.util.HashMap" >
+     select * from workproject where workprojectName = #{workprojectname,jdbcType=VARCHAR}
+  </select>
+   
+  <select id="getWorkProject"  resultType="java.util.HashMap">
+     select * from workproject
+  </select>
+  
+ 
+    <update id="changeWorkProject" parameterType="com.sun.pojo.WorkProject" >
+    update workproject
+    set workProjectName = #{workprojectname,jdbcType=VARCHAR}
+      workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
+      unitID = #{unitid,jdbcType=INTEGER},
+      workProjectRemarks = #{workprojectremarks,jdbcType=VARCHAR}
+      where workProjectID = #{workprojectid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sun.pojo.WorkProject" >
+    select 
+    <include refid="Base_Column_List" />
+    from workproject
+    where workProjectID = #{workprojectid,jdbcType=INTEGER}
+      and workProjectName = #{workprojectname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.WorkProject" >
+    delete from workproject
+    where workProjectID = #{workprojectid,jdbcType=INTEGER}
+      and workProjectName = #{workprojectname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.WorkProject" >
+    insert into workproject (workProjectID, workProjectName, workProjectParts, 
+      unitID, workProjectRemarks)
+    values (#{workprojectid,jdbcType=INTEGER}, #{workprojectname,jdbcType=VARCHAR}, #{workprojectparts,jdbcType=VARCHAR}, 
+      #{unitid,jdbcType=INTEGER}, #{workprojectremarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.WorkProject" >
+    insert into workproject
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workprojectid != null" >
+        workProjectID,
+      </if>
+      <if test="workprojectname != null" >
+        workProjectName,
+      </if>
+      <if test="workprojectparts != null" >
+        workProjectParts,
+      </if>
+      <if test="unitid != null" >
+        unitID,
+      </if>
+      <if test="workprojectremarks != null" >
+        workProjectRemarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workprojectid != null" >
+        #{workprojectid,jdbcType=INTEGER},
+      </if>
+      <if test="workprojectname != null" >
+        #{workprojectname,jdbcType=VARCHAR},
+      </if>
+      <if test="workprojectparts != null" >
+        #{workprojectparts,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="workprojectremarks != null" >
+        #{workprojectremarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sun.pojo.WorkProject" >
+    update workproject
+    <set >
+      <if test="workprojectparts != null" >
+        workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        unitID = #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="workprojectremarks != null" >
+        workProjectRemarks = #{workprojectremarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workProjectID = #{workprojectid,jdbcType=INTEGER}
+      and workProjectName = #{workprojectname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sun.pojo.WorkProject" >
+    update workproject
+    set workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
+      unitID = #{unitid,jdbcType=INTEGER},
+      workProjectRemarks = #{workprojectremarks,jdbcType=VARCHAR}
+    where workProjectID = #{workprojectid,jdbcType=INTEGER}
+      and workProjectName = #{workprojectname,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -9,6 +9,8 @@ public interface SettlementUnitService {
 
 	public boolean checkSettlementUnit(SettlementUnitKey SettlementUnitKey);
 	
+	public boolean checkChange(SettlementUnitKey SettlementUnitKey);
+	
 	public List<Map<String,Object>> getSettlementUnit();
 	
 	public boolean changeSettlementUnit(SettlementUnitKey SettlementUnitKey);

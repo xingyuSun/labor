@@ -79,7 +79,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tbody>
                                 	 <c:forEach items="${listMap}" var="item">
                                      	<tr>
                                    			<td name="unitID">${item.unitID}</td>
@@ -125,7 +124,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2">单位名称</label>
                                             <div class="col-md-10">
-                                                <input id="unitid" name="unitid" type="text" class="form-control" placeholder="单位编号..." />
+                                                <input id="unitidadd"  type="text" class="form-control" placeholder="单位编号..." />
                                             </div>
                                         </div>
                                     </div>
@@ -133,7 +132,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2">单位名称</label>
                                             <div class="col-md-10">
-                                                <input id="unitname" name="unitname" type="text" class="form-control" placeholder="单位名称..." />
+                                                <input id="unitnameadd" type="text" class="form-control" placeholder="单位名称..." />
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +157,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h4 class="modal-title">
                                 <i class="icon-pencil"></i>
-                                <span id="lblAddOneTitle" style="font-weight:bold">添加任务类型基本信息</span>
+                                <span id="lblAddOneTitle" style="font-weight:bold">修改单位</span>
                             </h4>
                         </div>
 
@@ -167,9 +166,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="control-label col-md-2">任务书名称</label>
+                                            <label class="control-label col-md-2">单位名称</label>
                                             <div class="col-md-10">
-                                                <input id="unitnamechange" type="text" class="form-control" placeholder="任务书名称..." />
+                                                <input id="unitnamechange" type="text" class="form-control" placeholder="单位名称..." />
                                             </div>
                                         </div>
                                     </div>
