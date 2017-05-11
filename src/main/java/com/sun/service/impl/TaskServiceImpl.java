@@ -21,10 +21,10 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public boolean checkTask(TaskKey TaskKey) {
 		// TODO Auto-generated method stub
-		if(this.TaskDao.checkTask(TaskKey))
-		   return false;
-		else
+		if(this.TaskDao.checkTask(TaskKey)==null)
 		   return true;
+		else
+		   return false;
 	}
 
 	@Override

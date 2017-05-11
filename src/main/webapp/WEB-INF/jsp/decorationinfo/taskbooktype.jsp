@@ -100,9 +100,9 @@
                                 	 <c:forEach items="${listMap}" var="item">
                                      	<tr>
                                    			<td name="taskID">${item.taskID}</td>
-                                   			<td naem="tsakName">${item.taskName}</td>
+                                   			<td name="taskName">${item.taskName}</td>
                                    			<td><input type="radio" name="ss"></td>
-                                            <td><input name="delete" type="checkbox"></td>
+                                            <td><input type="checkbox"></td>
                                      	</tr>
                                      </c:forEach>
                                 </tbody>
@@ -110,7 +110,7 @@
                                 <tr>
                                     <th>  </th>
                                     <th>  </th>
-                                    <th> <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#add"  style="width: 60px">添加</button> </th>
+                                    <th> <button type="button" id="addmodal" class="btn btn-block btn-info"   style="width: 60px">添加</button> </th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -142,7 +142,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2">任务书编号</label>
                                             <div class="col-md-10">
-                                                <input id="taskbooknum" name="taskbooknum" type="text" class="form-control" placeholder="任务书编号..." />
+                                                <input id="taskidadd" type="text" class="form-control" placeholder="任务书编号..." />
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2">任务书名称</label>
                                             <div class="col-md-10">
-                                                <input id="taskbookname" name="taskbooknum" type="text" class="form-control" placeholder="任务书名称..." />
+                                                <input id="tasknameadd"  type="text" class="form-control" placeholder="任务书名称..." />
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" id="changetask" class="btn btn-primary">确认</button>
+                                <button type="button" id="addtask" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
@@ -183,17 +183,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="control-label col-md-2">任务书编号</label>
-                                            <div class="col-md-10">
-                                                <input id="taskbookid" type="text"  class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
                                             <label class="control-label col-md-2">任务书名称</label>
                                             <div class="col-md-10">
-                                                <input id="taskbooknew" type="text" class="form-control" placeholder="任务书名称..." />
+                                                <input id="tasknamechange" type="text" class="form-control" placeholder="任务书名称..." />
                                             </div>
                                         </div>
                                     </div>
@@ -201,7 +193,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" id="addtask" class="btn btn-primary">确认</button>
+                                <button type="button" id="changetask" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
@@ -334,39 +326,36 @@
   $(function () {
   
           $("#changemodal").click(function(){
-               $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
+
+                $("#change").modal();
+                //document.getElementById('taskbookid').value = h;
+                //$("#identifier").modal();  
+          });
+          
+            $("#addmodal").click(function(){
+                $("#add").modal();
+            });
+  
+  
+
+          
+          
+         $("#changetask").click(function(){
+            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
                 n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
                 //alert(n);
                 h = $(this).parents("tr").find("[name='taskID']").text();
                 s = $(this).parents("tr").find("[name='taskName']").text();
-                alert(h);
-                $("#change").modal();
-                document.getElementById('taskbookid').value = h;
-                //$("#identifier").modal();  
-            });
-  
-  
-  
-          });
-            $("#change").click(function(){
-            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
-                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-                //alert(n);
-                h = $(this).parents("tr").find("[name='tsakID']").text();
-                s = $(this).parents("tr").find("[name='tsakName']").text();
                 //alert(h);
-            });
-            
-
-
+            });     
             
  	        var jsontest={
-     			 roleid:h,
-     			 rightsid:s
+     			 taskid:h,
+     			 taskname:$("#tasknamechange").val()
     	        };
                var $a = $(this);  
                $.ajax({  
-                  url:"<%=request.getContextPath()%>/systemmanage/changeTask",  
+                  url:"<%=request.getContextPath()%>/decorationinfo/changeTask",  
                   type:'post',  
                   data:jsontest,  
                   dataType: 'json',  
@@ -389,34 +378,65 @@
         });
   
   
+          $("#addtask").click(function(){
+   
+    	    var jsontest={
+     			 taskid:$("#taskidadd").val(),
+     			 taskname:$("#tasknameadd").val()
+    	        };
+
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/addTask",  
+                  type:"post",  
+                  //data:$.toJSON(taskArray),  
+                  data:jsontest,
+                  dataType: "json",  
   
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("添加成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("添加失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+
   
-  
-  
-            $("#delete").click(function(){
+            
+           
+
+        $("#delete").click(function(){
+          var taskArray = new Array();
             $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
                 n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-                //alert(n);
-                h = $(this).parents("tr").find("[name='tsakID']").text();
-                s = $(this).parents("tr").find("[name='tsakName']").text();
-                //alert(h);
-            });
- 	        var jsontest={
-     			 roleid:h,
-     			 rightsid:s
+                
+                h = $(this).parents("tr").find("[name='taskID']").text();
+                s = $(this).parents("tr").find("[name='taskName']").text();
+                
+                taskArray.push({taskid: h, taskname: s});
+    	   });
+    	    var jsontest={
+     			 taskid:h,
+     			 taskname:s
     	        };
-               var $a = $(this);  
-               $.ajax({  
-                  url:"<%=request.getContextPath()%>/systemmanage/deleteTask",  
-                  type:'post',  
-                  data:jsontest,  
-                  dataType: 'json',  
+    	        var $a = $(this);  
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/deleteTask",  
+                  type:"post",  
+                  //data:$.toJSON(taskArray),  
+                  data:jsontest,
+                  dataType: "json",  
   
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
 					  alert("删除成功");    		
-            		
          		  }
         		   else
          		  {
@@ -426,10 +446,8 @@
        			   error:function(data){              
         		  } 
               }); 
-            
-        });
-    
-  });
+             });
+          });
 </script>
 </body>
 </html>

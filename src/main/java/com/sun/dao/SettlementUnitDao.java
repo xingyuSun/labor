@@ -9,7 +9,7 @@ import com.sun.pojo.SettlementUnitKey;
 public interface SettlementUnitDao {
 	
 	
-	public boolean checkSettlementUnit(SettlementUnitKey SettlementUnitKey);
+	public SettlementUnitKey checkSettlementUnit(SettlementUnitKey SettlementUnitKey);
 	
 	public List<Map<String,Object>> getSettlementUnit();
 	

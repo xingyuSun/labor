@@ -7,7 +7,7 @@
   </resultMap>
   
   <select id="checkUnit" parameterType="com.sun.pojo.UnitKey"  resultType="com.sun.pojo.UnitKey">
-     select * from unit where   unitID = #{unitid,jdbcType=INTEGER}
+     select * from unit where   unitID = #{unitid,jdbcType=INTEGER} or unitName = #{unitname,jdbcType=VARCHAR}
   </select> 
    
   <select id="getUnit"  resultType="java.util.HashMap">

@@ -74,24 +74,26 @@
                                 <tr>
                                     <th>单位编号</th>
                                     <th>单位名</th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
+                                    <th><button type="button" id="changemodal"  class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
+                                    <th><button type="button" id="delete" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>01</td>
-                                    <td>工日</td>
-                                   	<td><input type="radio" name="ss"></td>
-                                    <td><input name="delete" type="checkbox"></td>
-                                </tr>
-
-
+                                <tbody>
+                                	 <c:forEach items="${listMap}" var="item">
+                                     	<tr>
+                                   			<td name="unitID">${item.unitID}</td>
+                                   			<td name="unitName">${item.unitName}</td>
+                                   			<td><input type="radio" name="ss"></td>
+                                            <td><input type="checkbox"></td>
+                                     	</tr>
+                                     </c:forEach>
+                                </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>  </th>
                                     <th>  </th>
-                                    <th> <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#add"  style="width: 60px">添加</button> </th>
+                                    <th> <button type="button" class="btn btn-block btn-info" id="addmodal"  style="width: 60px">添加</button> </th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -123,6 +125,14 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2">单位名称</label>
                                             <div class="col-md-10">
+                                                <input id="unitid" name="unitid" type="text" class="form-control" placeholder="单位编号..." />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">单位名称</label>
+                                            <div class="col-md-10">
                                                 <input id="unitname" name="unitname" type="text" class="form-control" placeholder="单位名称..." />
                                             </div>
                                         </div>
@@ -131,13 +141,54 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" class="btn btn-primary">确认</button>
+                                <button type="button" id="addunit" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
+            
+            
+            
+             <div id="change" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">
+                                <i class="icon-pencil"></i>
+                                <span id="lblAddOneTitle" style="font-weight:bold">添加任务类型基本信息</span>
+                            </h4>
+                        </div>
+
+                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">任务书名称</label>
+                                            <div class="col-md-10">
+                                                <input id="unitnamechange" type="text" class="form-control" placeholder="任务书名称..." />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" id="changeunit" class="btn btn-primary">确认</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            
             <!-- /.row -->
         </section>
         <!-- /.content -->
@@ -171,7 +222,7 @@
         <!-- Home tab content -->
         <div class="tab-pane" id="control-sidebar-home-tab">
             <h3 class="control-sidebar-heading">Recent Activity</h3>
-            <h3 class="control-sidebar-heading">Tasks Progress</h3>
+            <h3 class="control-sidebar-heading">units Progress</h3>
         </div>
     </div>
 </aside>
@@ -218,6 +269,145 @@
         $("#example1").DataTable();
         $('#reservation1').daterangepicker();
     });
+
+  $(function () {
+  
+          $("#changemodal").click(function(){
+
+                $("#change").modal();
+                //document.getElementById('unitbookid').value = h;
+                //$("#identifier").modal();  
+          });
+          
+            $("#addmodal").click(function(){
+                $("#add").modal();
+            });
+  
+  
+
+          
+          
+         $("#changeunit").click(function(){
+            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                //alert(n);
+                h = $(this).parents("tr").find("[name='unitID']").text();
+                s = $(this).parents("tr").find("[name='unitName']").text();
+                //alert(h);
+            });     
+            
+ 	        var jsontest={
+     			 unitid:h,
+     			 unitname:$("#unitnamechange").val()
+    	        };
+               var $a = $(this);  
+               $.ajax({  
+                  url:"<%=request.getContextPath()%>/decorationinfo/changeUnit",  
+                  type:'post',  
+                  data:jsontest,  
+                  dataType: 'json',  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("修改成功");    		
+            		
+         		  }
+        		   else
+         		  {
+         		  	alert("修改失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+            
+        });
+  
+  
+          $("#addunit").click(function(){
+   
+    	    var jsontest={
+     			 unitid:$("#unitidadd").val(),
+     			 unitname:$("#unitnameadd").val()
+    	        };
+
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/addUnit",  
+                  type:"post",  
+                  //data:$.toJSON(unitArray),  
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("添加成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("添加失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+
+  
+            
+           
+
+        $("#delete").click(function(){
+          var unitArray = new Array();
+            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                
+                h = $(this).parents("tr").find("[name='unitID']").text();
+                s = $(this).parents("tr").find("[name='unitName']").text();
+                
+                unitArray.push({unitid: h, unitname: s});
+    	   });
+    	    var jsontest={
+     			 unitid:h,
+     			 unitname:s
+    	        };
+    	        var $a = $(this);  
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/deleteUnit",  
+                  type:"post",  
+                  //data:$.toJSON(unitArray),  
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("删除成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("删除失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+          });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     $(document).ready(function() {
         $('#addfrom')

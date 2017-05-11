@@ -7,7 +7,7 @@
   </resultMap>
   
    <select id="checkSettlementUnit" parameterType="com.sun.pojo.SettlementUnitKey"  resultType="com.sun.pojo.SettlementUnitKey">
-     select * from settlementunit where   settlementunitID = #{settlementunitid,jdbcType=INTEGER}
+     select * from settlementunit where   settlementunitID = #{settlementunitid,jdbcType=INTEGER} or settlementunitName = #{settlementunitname,jdbcType=VARCHAR}
   </select> 
    
   <select id="getSettlementUnit"  resultType="java.util.HashMap">

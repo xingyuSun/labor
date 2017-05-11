@@ -6,7 +6,7 @@ import java.util.Map;
 import com.sun.pojo.UnitKey;
 
 public interface UnitDao {
-	public boolean checkUnit(UnitKey UnitKey);
+	public UnitKey checkUnit(UnitKey UnitKey);
 	
 	public List<Map<String,Object>> getUnit();
 	
@@ -14,9 +14,9 @@ public interface UnitDao {
 	
 	
 	
-    int deleteByPrimaryKey(UnitKey key);
+	boolean deleteByPrimaryKey(UnitKey key);
 
-    int insert(UnitKey record);
+	boolean insert(UnitKey record);
 
     int insertSelective(UnitKey record);
 }
