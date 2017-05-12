@@ -3,7 +3,7 @@ package com.sun.pojo;
 public class User {
     private Integer userid;
 
-    private String usename;
+    private String username;
 
     private String loginname;
 
@@ -21,12 +21,12 @@ public class User {
         this.userid = userid;
     }
 
-    public String getUsename() {
-        return usename;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsename(String usename) {
-        this.usename = usename == null ? null : usename.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getLoginname() {

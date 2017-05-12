@@ -3,7 +3,7 @@ package com.sun.pojo;
 public class WorkProject {
     private String workprojectparts;
 
-    private Integer unitid;
+    private String unitname;
 
     private String workprojectremarks;
 
@@ -35,12 +35,12 @@ public class WorkProject {
         this.workprojectparts = workprojectparts == null ? null : workprojectparts.trim();
     }
 
-    public Integer getUnitid() {
-        return unitid;
+    public String getUnitname() {
+        return unitname;
     }
 
-    public void setUnitid(Integer unitid) {
-        this.unitid = unitid;
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
     }
 
     public String getWorkprojectremarks() {

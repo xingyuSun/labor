@@ -96,22 +96,24 @@
                                     <th>审计人员</th>
                                     <th>成控部经理</th>
                                     <th>开始时间</th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
+                                    <th><button type="button" id="changemodal" class="btn btn-block btn-info"   style="width: 60px">修改</button></th>
+                                    <th><button type="button" id="delete" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>香山别墅二期</td>
-                                    <td>夏真兵</td>
-                                    <td>周孟起</td>
-                                    <td>温平静</td>
-                                    <td>2009-09-03</td>
-                                   	<td><input type="radio" name="ss"></td>
-                                    <td><input name="delete" type="checkbox"></td>
-                                </tr>
-
+                                	 <c:forEach items="${listMap}" var="item">
+                                     	<tr>
+                                   			<td name="projectID">${item.projectID}</td>
+                                   			<td name="projectName">${item.projectName}</td>
+                                   			<td name="projectManager">${item.projectManager}</td>          
+                                   			<td name="auditor">${item.auditor}</td>
+                                   			<td name="controlManager">${item.controlManager}</td>  
+                                   			<td name="beginTime">${item.beginTime}</td>                                      			                                        			                                          			                         			
+                                   			<td><input type="radio" name="ss"></td>
+                                            <td><input type="checkbox"></td>
+                                     	</tr>
+                                     </c:forEach>
+                                </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>  </th>
@@ -146,47 +148,50 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label class="control-label col-md-2">工程编号</label>
+                                            <div class="col-md-10">
+                                                <input id="projectidadd" name="projectidadd" type="text" class="form-control" placeholder="工程编号..." />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="control-label col-md-2">工程名称</label>
                                             <div class="col-md-10">
-                                                <input id="projectname" name="projectname" type="text" class="form-control" placeholder="任务书名称..." />
+                                                <input id="projectnameadd" name="projectnameadd" type="text" class="form-control" placeholder="工程书名称..." />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-2">项目经理</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">现金账户</option>
-                                                    <option>银行卡/存折</option>
-                                                    <option>信用卡</option>
-                                                    <option>电子账户</option>
-                                                    <option>投资账户</option>
-                                                    <option>其他</option>
+                                                <select id="projectmanageradd" class="form-control select2" style="width: 100%;">
+                                                  <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                    <option selected="selected">${item.userName}</option>
+
+                                                  </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-2">审计人员</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">现金账户</option>
-                                                    <option>银行卡/存折</option>
-                                                    <option>信用卡</option>
-                                                    <option>电子账户</option>
-                                                    <option>投资账户</option>
-                                                    <option>其他</option>
+                                                <select id="auditoradd" class="form-control select2" style="width: 100%;">
+                                                    <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                    <option selected="selected">${item.userName}</option>
+
+                                                  </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-2">成控部经理</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">现金账户</option>
-                                                    <option>银行卡/存折</option>
-                                                    <option>信用卡</option>
-                                                    <option>电子账户</option>
-                                                    <option>投资账户</option>
-                                                    <option>其他</option>
+                                                <select id="controlmanageradd" class="form-control select2" style="width: 100%;">
+                                                 <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                    <option selected="selected">${item.userName}</option>
+
+                                                  </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
@@ -197,7 +202,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="datepicker">
+                                                    <input type="text" id="begintimeadd"   class="form-control pull-right">
                                                 </div>
                                             </div>
                                         </div>
@@ -207,13 +212,105 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" class="btn btn-primary">确认</button>
+                                <button type="button" id="addproject" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
+            
+            
+            
+            <div id="change" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">
+                                <i class="icon-pencil"></i>
+                                <span id="lblAddOneTitle" style="font-weight:bold">修改对应工程信息</span>
+                            </h4>
+                        </div>
+
+                        <form class="form-horizontal form-bordered form-row-strippe" id="changefrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">工程编号</label>
+                                            <div class="col-md-10">
+                                                <input id="projectidchange" name="projectidchange" type="text" class="form-control" placeholder="工程编号..." />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">工程名称</label>
+                                            <div class="col-md-10">
+                                                <input id="projectnamechange" name="projectnamechange" type="text" class="form-control" placeholder="工程书名称..." />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">项目经理</label>
+                                            <div class="col-md-10">
+                                                <select id="projectmanagerchange" class="form-control select2" style="width: 100%;">
+                                                    <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                    <option selected="selected">${item.userName}</option>
+
+                                                  </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">审计人员</label>
+                                            <div class="col-md-10">
+                                                <select id="auditorchange" class="form-control select2" style="width: 100%;">
+                                                     <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                     <option selected="selected">${item.userName}</option>
+
+                                                     </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">成控部经理</label>
+                                            <div class="col-md-10">
+                                                <select id="controlmanagerchange" class="form-control select2" style="width: 100%;">
+                                                   <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                    <option selected="selected">${item.userName}</option>
+
+                                                  </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">开始时间</label>
+                                            <div class="col-md-10">
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" data-format="yyyy-MM-dd" class="form-control pull-right" id="begintimechange">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" id="changeproject" class="btn btn-primary">确认</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>                    
+            
+            
             <!-- /.row -->
         </section>
         <!-- /.content -->
@@ -293,12 +390,161 @@
     $(function () {
         $("#example1").DataTable();
         $('#reservation1').daterangepicker();
-    });
 
-    //Date picker
-    $('#datepicker').datepicker({
-        autoclose: true
     });
+        $('#begintimechange').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        });
+        
+        
+        $('#begintimeadd').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        });
+         
+         
+          $("#changemodal").click(function(){
+           $("#change").modal();
+                //document.getElementById('projectbookid').value = h;
+                //$("#identifier").modal();  
+          });
+          
+          $("#addmodal").click(function(){
+             $("#add").modal();
+          });
+
+         $("#changeproject").click(function(){
+            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                //alert(n);
+                h = $(this).parents("tr").find("[name='projectID']").text();
+                s = $(this).parents("tr").find("[name='projectName']").text();
+                m = $(this).parents("tr").find("[name='projectManager']").text();
+                a = $(this).parents("tr").find("[name='auditor']").text();
+                c = $(this).parents("tr").find("[name='controlManager']").text();
+                b = $(this).parents("tr").find("[name='beginTime']").text();                                                                
+                //alert(h);
+            });     
+            
+ 	        var jsontest={
+     			 projectid:h,
+     			 projectname:$("#projectnamechange").val(),
+     			 projectmanager:$("#projectmanagerchange").val(),
+      			 auditor:$("#auditorchange").val(),  			 
+     			 controlmanager:$("#controlmanagerchange").val(),
+     			 begintime:$("#begintimechange").val()
+    	        };
+               var $a = $(this);  
+               $.ajax({  
+                  url:"<%=request.getContextPath()%>/decorationinfo/changeProject",  
+                  type:'post',  
+                  data:jsontest,  
+                  dataType: 'json',  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("修改成功");    		
+            		
+         		  }
+        		   else
+         		  {
+         		  	alert("修改失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+            
+        });
+  
+  
+          $("#addproject").click(function(){
+   
+    	    var jsontest={
+     			 projectid:$("#projectidadd").val(),
+     			 projectname:$("#projectnameadd").val(),
+     			 projectmanager:$("#projectmanageradd").val(),
+      			 auditor:$("#auditoradd").val(),  			 
+     			 controlmanager:$("#controlmanageradd").val(),
+     			 begintime:$("#begintimeadd").val()
+    	        };
+
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/addProject",  
+                  type:"post",  
+                  //data:$.toJSON(projectArray),  
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("添加成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("添加失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+
+  
+            
+           
+
+        $("#delete").click(function(){
+          var projectArray = new Array();
+            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                
+                h = $(this).parents("tr").find("[name='projectID']").text();
+                s = $(this).parents("tr").find("[name='projectName']").text();
+                
+                projectArray.push({projectid: h, projectname: s});
+    	   });
+    	    var jsontest={
+     			 projectid:h,
+     			 projectname:s
+    	        };
+    	        var $a = $(this);  
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/deleteProject",  
+                  type:"post",  
+                  //data:$.toJSON(projectArray),  
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("删除成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("删除失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

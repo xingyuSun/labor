@@ -5,11 +5,11 @@
     <id column="workProjectID" property="workprojectid" jdbcType="INTEGER" />
     <id column="workProjectName" property="workprojectname" jdbcType="VARCHAR" />
     <result column="workProjectParts" property="workprojectparts" jdbcType="VARCHAR" />
-    <result column="unitID" property="unitid" jdbcType="INTEGER" />
+    <result column="unitName" property="unitname" jdbcType="VARCHAR" />
     <result column="workProjectRemarks" property="workprojectremarks" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    workProjectID, workProjectName, workProjectParts, unitID, workProjectRemarks
+    workProjectID, workProjectName, workProjectParts, unitName, workProjectRemarks
   </sql>
   
   <select id="checkWorkProject" parameterType="com.sun.pojo.WorkProject"  resultType="java.util.HashMap">
@@ -27,9 +27,9 @@
  
     <update id="changeWorkProject" parameterType="com.sun.pojo.WorkProject" >
     update workproject
-    set workProjectName = #{workprojectname,jdbcType=VARCHAR}
+    set workProjectName = #{workprojectname,jdbcType=VARCHAR},
       workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
-      unitID = #{unitid,jdbcType=INTEGER},
+      unitName = #{unitname,jdbcType=VARCHAR},
       workProjectRemarks = #{workprojectremarks,jdbcType=VARCHAR}
       where workProjectID = #{workprojectid,jdbcType=INTEGER}
   </update>
@@ -50,9 +50,9 @@
   </delete>
   <insert id="insert" parameterType="com.sun.pojo.WorkProject" >
     insert into workproject (workProjectID, workProjectName, workProjectParts, 
-      unitID, workProjectRemarks)
+      unitName, workProjectRemarks)
     values (#{workprojectid,jdbcType=INTEGER}, #{workprojectname,jdbcType=VARCHAR}, #{workprojectparts,jdbcType=VARCHAR}, 
-      #{unitid,jdbcType=INTEGER}, #{workprojectremarks,jdbcType=VARCHAR})
+      #{unitname,jdbcType=VARCHAR}, #{workprojectremarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sun.pojo.WorkProject" >
     insert into workproject
@@ -66,8 +66,8 @@
       <if test="workprojectparts != null" >
         workProjectParts,
       </if>
-      <if test="unitid != null" >
-        unitID,
+      <if test="unitname != null" >
+        unitName,
       </if>
       <if test="workprojectremarks != null" >
         workProjectRemarks,
@@ -83,8 +83,8 @@
       <if test="workprojectparts != null" >
         #{workprojectparts,jdbcType=VARCHAR},
       </if>
-      <if test="unitid != null" >
-        #{unitid,jdbcType=INTEGER},
+      <if test="unitname != null" >
+        #{unitname,jdbcType=VARCHAR},
       </if>
       <if test="workprojectremarks != null" >
         #{workprojectremarks,jdbcType=VARCHAR},
@@ -97,8 +97,8 @@
       <if test="workprojectparts != null" >
         workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
       </if>
-      <if test="unitid != null" >
-        unitID = #{unitid,jdbcType=INTEGER},
+      <if test="unitname != null" >
+        unitName = #{unitname,jdbcType=VARCHAR},
       </if>
       <if test="workprojectremarks != null" >
         workProjectRemarks = #{workprojectremarks,jdbcType=VARCHAR},
@@ -110,7 +110,7 @@
   <update id="updateByPrimaryKey" parameterType="com.sun.pojo.WorkProject" >
     update workproject
     set workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
-      unitID = #{unitid,jdbcType=INTEGER},
+      unitName = #{unitname,jdbcType=VARCHAR},
       workProjectRemarks = #{workprojectremarks,jdbcType=VARCHAR}
     where workProjectID = #{workprojectid,jdbcType=INTEGER}
       and workProjectName = #{workprojectname,jdbcType=VARCHAR}

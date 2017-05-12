@@ -76,19 +76,24 @@
                                     <th>工作项目名称</th>
                                     <th>工程部位</th>
                                     <th>单位</th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">修改</button></th>
-                                    <th><button type="button" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
+                                    <th>备注</th>
+                                    <th><button type="button" id="changemodal" class="btn btn-block btn-info"   style="width: 60px">修改</button></th>
+                                    <th><button type="button" id="delete" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>桩基泥岩、强风化砂岩等松次坚石（风镐开挖）（直径<=1m或不分直径）</td>
-                                    <td>桩基</td>
-                                    <td>m3</td>
-                                   	<td><input type="radio" name="ss"></td>
-                                    <td><input name="delete" type="checkbox"></td>
-                                </tr>
+                                	 <c:forEach items="${listMap}" var="item">
+                                     	<tr>
+                                   			<td name="workProjectID">${item.workProjectID}</td>
+                                   			<td name="workProjectName">${item.workProjectName}</td>
+                                   			<td name="workProjectParts">${item.workProjectParts}</td>          
+                                   			<td name="unitName">${item.unitName}</td>
+                                   			<td name="workProjectRemarks">${item.workProjectRemarks}</td>                                    			                                        			                                          			                         			
+                                   			<td><input type="radio" name="ss"></td>
+                                            <td><input type="checkbox"></td>
+                                     	</tr>
+                                     </c:forEach>
+                                </tbody>
 
                                 <tfoot>
                                 <tr>
@@ -123,10 +128,19 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
+                                    
                                         <div class="form-group">
+                                            <label class="control-label col-md-2">工作项目编号</label>
+                                            <div class="col-md-10">
+                                                <input id="workprojectidadd"  type="text" class="form-control" placeholder="工作项目编号..." />
+                                            </div>
+                                        </div>
+                                    
+                                    
+<!--                                         <div class="form-group">
                                             <label class="control-label col-md-2">分部</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" style="width: 100%;">
+                                                <select id="divisionadd" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">包干价报告补贴等</option>
                                                     <option>项目经理</option>
                                                     <option>信用卡</option>
@@ -135,13 +149,13 @@
                                                     <option>其他</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group">
                                             <label class="control-label col-md-2">工程部位</label>
                                             <div class="col-md-10">
                                                 <select class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">包干价报告补贴等</option>
+                                                    <option id="workprojectpartsadd" selected="selected">包干价报告补贴等</option>
                                                     <option>项目经理</option>
                                                     <option>信用卡</option>
                                                     <option>电子账户</option>
@@ -154,15 +168,81 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2">工作项目名称</label>
                                             <div class="col-md-10">
-                                                <input id="projectname" name="projectname" type="text" class="form-control" placeholder="工作项目名称..." />
+                                                <input id="workprojectnameadd" type="text" class="form-control" placeholder="工作项目名称..." />
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-2">单位</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" style="width: 100%;">
+                                                <select id="unitnameadd" class="form-control select2" style="width: 100%;">
+
+                                                    <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                    <option selected="selected">${item.unitName}</option>
+
+                                                  </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">用户备注</label>
+                                            <div class="col-md-10">
+                                                <textarea id="workprojectremarksadd" class="form-control"  rows="8" placeholder="Enter ..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" id="addworkproject" class="btn btn-primary">确认</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="change" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">
+                                <i class="icon-pencil"></i>
+                                <span id="AddTitle" style="font-weight:bold">修改工作项目基本信息</span>
+                            </h4>
+                        </div>
+
+                        <form class="form-horizontal form-bordered form-row-strippe" id="changefrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    
+                                                                       
+<!--                                         <div class="form-group">
+                                            <label class="control-label col-md-2">分部</label>
+                                            <div class="col-md-10">
+                                                <select id="divisionchange" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">包干价报告补贴等</option>
+                                                    <option>项目经理</option>
+                                                    <option>信用卡</option>
+                                                    <option>电子账户</option>
+                                                    <option>投资账户</option>
+                                                    <option>其他</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">工程部位</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" style="width: 100%;">
+                                                    <option id="workprojectpartschange" selected="selected">包干价报告补贴等</option>
                                                     <option>项目经理</option>
                                                     <option>信用卡</option>
                                                     <option>电子账户</option>
@@ -173,9 +253,29 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label class="control-label col-md-2">工作项目名称</label>
+                                            <div class="col-md-10">
+                                                <input id="workprojectnamechange" type="text" class="form-control" placeholder="工作项目名称..." />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">单位</label>
+                                            <div class="col-md-10">
+                                                <select id="unitnamechange" class="form-control select2" style="width: 100%;">
+                                                    <c:forEach items="${listMapu}" var="item">
+                                                     
+                                                    <option selected="selected">${item.unitName}</option>
+
+                                                  </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label class="control-label col-md-2">用户备注</label>
                                             <div class="col-md-10">
-                                                <textarea id="remarks" name="remarks" class="form-control"  rows="8" placeholder="Enter ..."></textarea>
+                                                <textarea id="workprojectremarkschange" class="form-control"  rows="8" placeholder="Enter ..."></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -183,13 +283,15 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" class="btn btn-primary">确认</button>
+                                <button type="button" id="changeworkproject" class="btn btn-primary">确认</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
-            </div>
+            </div>            
+            
+            
             <!-- /.row -->
         </section>
         <!-- /.content -->
@@ -270,6 +372,134 @@
         $("#example1").DataTable();
         $('#reservation1').daterangepicker();
     });
+
+
+          $("#changemodal").click(function(){
+           $("#change").modal();
+                //document.getElementById('workprojectbookid').value = h;
+                //$("#identifier").modal();  
+          });
+          
+          $("#addmodal").click(function(){
+             $("#add").modal();
+          });
+
+         $("#changeworkproject").click(function(){
+            $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                //alert(n);
+                h = $(this).parents("tr").find("[name='workProjectID']").text();
+                s = $(this).parents("tr").find("[name='workProjectName']").text();                                                               
+                //alert(h);
+            });     
+            alert(h);
+ 	        var jsontest={
+     			 workprojectid:h,
+     			 workprojectname:$("#workprojectnamechange").val(),
+     			 workprojectparts:$("#workprojectpartschange").val(),
+      			 unitname:$("#unitnamechange").val(),  			 
+     			 workprojectremarks:$("#workprojectremarkschange").val(),
+    	        };
+    	        alert(h);
+               var $a = $(this);  
+               $.ajax({  
+                  url:"<%=request.getContextPath()%>/decorationinfo/changeWorkProject",  
+                  type:'post',  
+                  data:jsontest,  
+                  dataType: 'json',  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("修改成功");    		
+            		
+         		  }
+        		   else
+         		  {
+         		  	alert("修改失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+            
+        });
+  
+  
+          $("#addworkproject").click(function(){
+    	    var jsontest={
+     			 workprojectid:$("#workprojectidadd").val(),
+     			 workprojectname:$("#workprojectnameadd").val(),
+     			 workprojectparts:$("#workprojectpartsadd").val(),
+      			 unitname:$("#unitnameadd").val(),  			 
+     			 workprojectremarks:$("#workprojectremarksadd").val()
+    	        };
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/addWorkProject",
+                  type:"post",   
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("添加成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("添加失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+
+  
+            
+           
+
+        $("#delete").click(function(){
+          var workprojectArray = new Array();
+            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                
+                h = $(this).parents("tr").find("[name='workProjectID']").text();
+                s = $(this).parents("tr").find("[name='workProjectName']").text();
+                
+                workprojectArray.push({workprojectid: h, workprojectname: s});
+    	   });
+    	    var jsontest={
+     			 workprojectid:h,
+     			 workprojectname:s
+    	        };
+    	        var $a = $(this);  
+               $.ajax({
+                  url:"<%=request.getContextPath()%>/decorationinfo/deleteWorkProject",  
+                  type:"post",  
+                  //data:$.toJSON(workprojectArray),  
+                  data:jsontest,
+                  dataType: "json",  
+  
+        		  success:function(data){
+         		  if (data && data.success == "true") 
+         		  {
+					  alert("删除成功");    		
+         		  }
+        		   else
+         		  {
+         		  	alert("删除失败");   
+         		  }  
+        		  },        
+       			   error:function(data){              
+        		  } 
+              }); 
+             });
+
+
+
+
+
 
     $(document).ready(function() {
         $('#addfrom')

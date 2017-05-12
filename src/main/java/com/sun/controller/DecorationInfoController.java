@@ -27,6 +27,7 @@ import com.sun.service.RoleService;
 import com.sun.service.SettlementUnitService;
 import com.sun.service.TaskService;
 import com.sun.service.UnitService;
+import com.sun.service.UserService;
 import com.sun.service.WorkProjectService;
 
 
@@ -47,6 +48,8 @@ public class DecorationInfoController {
 	private ProjectService projectService;
 	@Resource
 	private WorkProjectService workProjectService;
+	@Resource
+	private UserService userService;
 	
 	
 	
@@ -332,13 +335,15 @@ public class DecorationInfoController {
 	
 	
 	
-	@RequestMapping("/project")
+	@RequestMapping("/projectinfomanagement")
 	public ModelAndView Project(HttpSession session){
 		Map nameAndID=getNameAndID(session);
 		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
-		ModelAndView m = new ModelAndView("decorationinfo/project");
+		ModelAndView m = new ModelAndView("decorationinfo/projectinfomanagement");
 		List<Map<String,Object>> mapList=projectService.getProject();
+		List<Map<String,Object>> mapListu=userService.getUser();
 		m.addObject("listMap", mapList);
+		m.addObject("listMapu", mapListu);
 		return m;
 	}
 	
@@ -400,13 +405,15 @@ public class DecorationInfoController {
 
 	
 
-	@RequestMapping("/workProject")
+	@RequestMapping("/subcriteria")
 	public ModelAndView WorkProject(HttpSession session){
 		Map nameAndID=getNameAndID(session);
 		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
-		ModelAndView m = new ModelAndView("decorationinfo/workProject");
+		ModelAndView m = new ModelAndView("decorationinfo/subcriteria");
 		List<Map<String,Object>> mapList=workProjectService.getWorkProject();
+		List<Map<String,Object>> mapListu=unitService.getUnit();
 		m.addObject("listMap", mapList);
+		m.addObject("listMapu", mapListu);
 		return m;
 	}
 	
@@ -434,7 +441,6 @@ public class DecorationInfoController {
 	public Map<String,Object> doAddWorkProject(WorkProject WorkProject,HttpSession session) throws IOException{
 		String id=(String)session.getAttribute("userID");
 		int ID=Integer.parseInt(id);
-		//rolerightsKey.setUserID(ID);
 		System.out.println(WorkProject.getWorkprojectid());
 		System.out.println(WorkProject.getWorkprojectname());
 		Map<String,Object> map = new HashMap<String,Object>();

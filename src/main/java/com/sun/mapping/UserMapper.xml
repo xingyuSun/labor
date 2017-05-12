@@ -3,15 +3,23 @@
 <mapper namespace="com.sun.dao.UserDao">
   <resultMap id="BaseResultMap" type="com.sun.pojo.User">
     <id column="userID" jdbcType="INTEGER" property="userid" />
-    <result column="useName" jdbcType="VARCHAR" property="usename" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="loginName" jdbcType="VARCHAR" property="loginname" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="roleID" jdbcType="INTEGER" property="roleid" />
     <result column="userRemark" jdbcType="VARCHAR" property="userremark" />
   </resultMap>
   <sql id="Base_Column_List">
-    userID, useName, loginName, password, roleID, userRemark
+    userID, userName, loginName, password, roleID, userRemark
   </sql>
+  
+  
+   <select id="getUser"  resultType="java.util.HashMap">
+     select * from user
+   </select>
+  
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -34,10 +42,10 @@
     where userID = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.sun.pojo.User">
-    insert into user (userID, useName, loginName, 
+    insert into user (userID, userName, loginName, 
       password, roleID, userRemark
       )
-    values (#{userid,jdbcType=INTEGER}, #{usename,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, 
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{roleid,jdbcType=INTEGER}, #{userremark,jdbcType=VARCHAR}
       )
   </insert>
@@ -47,8 +55,8 @@
       <if test="userid != null">
         userID,
       </if>
-      <if test="usename != null">
-        useName,
+      <if test="username != null">
+        userName,
       </if>
       <if test="loginname != null">
         loginName,
@@ -67,8 +75,8 @@
       <if test="userid != null">
         #{userid,jdbcType=INTEGER},
       </if>
-      <if test="usename != null">
-        #{usename,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="loginname != null">
         #{loginname,jdbcType=VARCHAR},
@@ -87,8 +95,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sun.pojo.User">
     update user
     <set>
-      <if test="usename != null">
-        useName = #{usename,jdbcType=VARCHAR},
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
       </if>
       <if test="loginname != null">
         loginName = #{loginname,jdbcType=VARCHAR},
@@ -107,7 +115,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sun.pojo.User">
     update user
-    set useName = #{usename,jdbcType=VARCHAR},
+    set userName = #{username,jdbcType=VARCHAR},
       loginName = #{loginname,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       roleID = #{roleid,jdbcType=INTEGER},
