@@ -21,7 +21,7 @@ public class SettlementUnitServiceImpl implements SettlementUnitService {
 	@Override
 	public boolean checkSettlementUnit(SettlementUnitKey SettlementUnitKey) {
 		// TODO Auto-generated method stub
-		if(this.SettlementUnitDao.checkSettlementUnit(SettlementUnitKey)==null)
+		if(this.SettlementUnitDao.checkSettlementUnit(SettlementUnitKey).isEmpty())
 		   return true;
 		else
 		   return false;
@@ -30,7 +30,7 @@ public class SettlementUnitServiceImpl implements SettlementUnitService {
 	@Override
 	public boolean checkChange(SettlementUnitKey SettlementUnitKey) {
 		// TODO Auto-generated method stub
-		if(this.SettlementUnitDao.checkSettlementUnit(SettlementUnitKey)==null)
+		if(this.SettlementUnitDao.checkChange(SettlementUnitKey).isEmpty())
 		   return true;
 		else
 		   return false;

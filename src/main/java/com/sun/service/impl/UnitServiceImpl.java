@@ -21,7 +21,7 @@ public class UnitServiceImpl implements UnitService {
 	@Override
 	public boolean checkUnit(UnitKey UnitKey) {
 		// TODO Auto-generated method stub
-		if(this.UnitDao.checkUnit(UnitKey)==null)
+		if(this.UnitDao.checkUnit(UnitKey).isEmpty())
 		   return true;
 		else
 		   return false;
@@ -30,7 +30,7 @@ public class UnitServiceImpl implements UnitService {
 	@Override
 	public boolean checkChange(UnitKey UnitKey) {
 		// TODO Auto-generated method stub
-		if(this.UnitDao.checkUnit(UnitKey)==null)
+		if(this.UnitDao.checkChange(UnitKey).isEmpty())
 		   return true;
 		else
 		   return false;

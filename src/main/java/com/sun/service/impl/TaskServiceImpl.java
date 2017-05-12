@@ -21,16 +21,21 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public boolean checkTask(TaskKey TaskKey) {
 		// TODO Auto-generated method stub
-		if(this.TaskDao.checkTask(TaskKey)==null)
+		System.out.println(TaskKey.getTaskid());
+		if(TaskDao.checkTask(TaskKey).isEmpty())
+		{
 		   return true;
+		}
 		else
+		{
 		   return false;
+		}
 	}
 	
 	@Override
 	public boolean checkChange(TaskKey TaskKey) {
 		// TODO Auto-generated method stub
-		if(this.TaskDao.checkTask(TaskKey)==null)
+		if(this.TaskDao.checkChange(TaskKey).isEmpty())
 		   return true;
 		else
 		   return false;
@@ -79,10 +84,5 @@ public class TaskServiceImpl implements TaskService {
 		}
 		else
 		return false;
-	}
-
-	
-	
-	
-	
+	}	
 }

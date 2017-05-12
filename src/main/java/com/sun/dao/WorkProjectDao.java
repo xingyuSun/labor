@@ -8,13 +8,13 @@ import com.sun.pojo.WorkProject;
 public interface WorkProjectDao {
 
 	
-	public List<Map<String,Object>> checkDivision(WorkProject WorkProject);
+	public List<Map<String,Object>> checkWorkProject(WorkProject WorkProject);
 	
 	public List<Map<String,Object>> checkChange(WorkProject WorkProject);
 	
-	public List<Map<String,Object>> getDivision();
+	public List<Map<String,Object>> getWorkProject();
 	
-	public boolean changeDivision(WorkProject WorkProject);	
+	public boolean changeWorkProject(WorkProject WorkProject);	
 	
 	boolean deleteByPrimaryKey(WorkProject key);
 

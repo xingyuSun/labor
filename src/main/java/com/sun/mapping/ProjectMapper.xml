@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sun.dao.ProjectMapper" >
+<mapper namespace="com.sun.dao.ProjectDao" >
   <resultMap id="BaseResultMap" type="com.sun.pojo.Project" >
     <id column="projectID" property="projectid" jdbcType="INTEGER" />
     <id column="projectName" property="projectname" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
      select * from project where projectName = #{projectname,jdbcType=VARCHAR}
   </select>
   
-  <update id="changeProject" parameterType="test.pojo.Project" >
+  <update id="changeProject" parameterType="com.sun.pojo.Project" >
     update project
     set projectName = #{projectname,jdbcType=VARCHAR},
        projectManager = #{projectmanager,jdbcType=VARCHAR},
@@ -103,7 +103,7 @@
     </trim>
   </insert>
   
-  <update id="updateByPrimaryKeySelective" parameterType="test.pojo.Project" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.sun.pojo.Project" >
     update project
     <set >
       <if test="projectmanager != null" >
@@ -123,7 +123,7 @@
       and projectName = #{projectname,jdbcType=VARCHAR}
   </update>
   
-  <update id="updateByPrimaryKey" parameterType="test.pojo.Project" >
+  <update id="updateByPrimaryKey" parameterType="com.sun.pojo.Project" >
     update project
     set projectManager = #{projectmanager,jdbcType=VARCHAR},
       auditor = #{auditor,jdbcType=VARCHAR},

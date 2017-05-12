@@ -14,14 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.pojo.DivisionKey;
+import com.sun.pojo.Project;
+import com.sun.pojo.WorkProject;
 import com.sun.pojo.SettlementUnitKey;
 import com.sun.pojo.TaskKey;
 import com.sun.pojo.UnitKey;
 import com.sun.pojo.rolerightsKey;
+import com.sun.service.DivisionService;
+import com.sun.service.ProjectService;
 import com.sun.service.RoleService;
 import com.sun.service.SettlementUnitService;
 import com.sun.service.TaskService;
 import com.sun.service.UnitService;
+import com.sun.service.WorkProjectService;
 
 
 
@@ -35,6 +41,14 @@ public class DecorationInfoController {
 	private UnitService unitService;
 	@Resource
 	private SettlementUnitService settlementUnitService;
+	@Resource
+	private DivisionService divisionService;
+	@Resource
+	private ProjectService projectService;
+	@Resource
+	private WorkProjectService workProjectService;
+	
+	
 	
 	@RequestMapping("/taskbooktype")
 	public ModelAndView TaskBookType(HttpSession session){
@@ -80,8 +94,7 @@ public class DecorationInfoController {
 	    if(taskService.insert(TaskKey))
 	    	map.put("success", "true");
 		else
-			map.put("success", "false");
-	   	    
+			map.put("success", "false");	   	    
 		return map;  
 		
 	}
@@ -239,6 +252,211 @@ public class DecorationInfoController {
 		System.out.println(SettlementUnitKey.getSettlementunitname());
 		Map<String,Object> map = new HashMap<String,Object>();
 	    if(settlementUnitService.changeSettlementUnit(SettlementUnitKey))
+	    	map.put("success", "true");
+	    
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+	
+	
+	
+	@RequestMapping("/divisionstandard(d)")
+	public ModelAndView Division(HttpSession session){
+		Map nameAndID=getNameAndID(session);
+		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
+		ModelAndView m = new ModelAndView("decorationinfo/divisionstandard(d)");
+		List<Map<String,Object>> mapList=divisionService.getDivision();
+		m.addObject("listMap", mapList);
+		return m;
+	}
+	
+	
+	
+	@RequestMapping(value="/deleteDivision",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doDeleteDivision(DivisionKey DivisionKey,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(DivisionKey.getDivisionid());
+		System.out.println(DivisionKey.getDivisionname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(divisionService.deleteByPrimaryKey(DivisionKey))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/addDivision",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doAddDivision(DivisionKey DivisionKey,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(DivisionKey.getDivisionid());
+		System.out.println(DivisionKey.getDivisionname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(divisionService.insert(DivisionKey))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/changeDivision",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doChangeDivision(DivisionKey DivisionKey,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(DivisionKey.getDivisionid());
+		System.out.println(DivisionKey.getDivisionname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(divisionService.changeDivision(DivisionKey))
+	    	map.put("success", "true");	    
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+
+	
+	
+	
+	
+	@RequestMapping("/project")
+	public ModelAndView Project(HttpSession session){
+		Map nameAndID=getNameAndID(session);
+		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
+		ModelAndView m = new ModelAndView("decorationinfo/project");
+		List<Map<String,Object>> mapList=projectService.getProject();
+		m.addObject("listMap", mapList);
+		return m;
+	}
+	
+	
+	
+	@RequestMapping(value="/deleteProject",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doDeleteProject(Project Project,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(Project.getProjectid());
+		System.out.println(Project.getProjectname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(projectService.deleteByPrimaryKey(Project))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/addProject",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doAddProject(Project Project,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(Project.getProjectid());
+		System.out.println(Project.getProjectname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(projectService.insert(Project))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/changeProject",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doChangeProject(Project Project,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(Project.getProjectid());
+		System.out.println(Project.getProjectname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(projectService.changeProject(Project))
+	    	map.put("success", "true");
+	    
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+
+	
+
+	@RequestMapping("/workProject")
+	public ModelAndView WorkProject(HttpSession session){
+		Map nameAndID=getNameAndID(session);
+		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
+		ModelAndView m = new ModelAndView("decorationinfo/workProject");
+		List<Map<String,Object>> mapList=workProjectService.getWorkProject();
+		m.addObject("listMap", mapList);
+		return m;
+	}
+	
+	
+	
+	@RequestMapping(value="/deleteWorkProject",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doDeleteWorkProject(WorkProject WorkProject,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(WorkProject.getWorkprojectid());
+		System.out.println(WorkProject.getWorkprojectname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(workProjectService.deleteByPrimaryKey(WorkProject))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/addWorkProject",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doAddWorkProject(WorkProject WorkProject,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(WorkProject.getWorkprojectid());
+		System.out.println(WorkProject.getWorkprojectname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(workProjectService.insert(WorkProject))
+	    	map.put("success", "true");
+		else
+			map.put("success", "false");
+	   	    
+		return map;  
+		
+	}
+	
+	@RequestMapping(value="/changeWorkProject",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> doChangeWorkProject(WorkProject WorkProject,HttpSession session) throws IOException{
+		String id=(String)session.getAttribute("userID");
+		int ID=Integer.parseInt(id);
+		//rolerightsKey.setUserID(ID);
+		System.out.println(WorkProject.getWorkprojectid());
+		System.out.println(WorkProject.getWorkprojectname());
+		Map<String,Object> map = new HashMap<String,Object>();
+	    if(workProjectService.changeWorkProject(WorkProject))
 	    	map.put("success", "true");
 	    
 		else

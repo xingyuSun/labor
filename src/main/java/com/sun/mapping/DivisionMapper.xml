@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sun.dao.DivisionMapper" >
+<mapper namespace="com.sun.dao.DivisionDao" >
   <resultMap id="BaseResultMap" type="com.sun.pojo.DivisionKey" >
     <id column="divisionID" property="divisionid" jdbcType="INTEGER" />
     <id column="divisionName" property="divisionname" jdbcType="VARCHAR" />
@@ -34,6 +34,7 @@
     insert into division (divisionID, divisionName)
     values (#{divisionid,jdbcType=INTEGER}, #{divisionname,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.sun.pojo.DivisionKey" >
     insert into division
     <trim prefix="(" suffix=")" suffixOverrides="," >
