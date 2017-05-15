@@ -35,11 +35,11 @@ public class UserController {
 	
 	@RequestMapping("/checklogin")
 	public ModelAndView CheckLogin(User user,HttpSession session){
-		System.out.println("成功"+user.getPassword());
 		boolean flg=userService.userCheckUser(user);
 		if(flg) {
 			User u= userService.getUserByLoginName(user.getLoginname());
 			String name=u.getLoginname(); 
+			String role=u.getRolename(); 
 			int ID = u.getUserid();			
 			Map<String, String> map = new HashMap<String, String>();
 			//map.put("userName", name);
@@ -49,6 +49,7 @@ public class UserController {
 			//m.addObject("map", map);
 			session.setAttribute("userID", String.valueOf(ID));
 			session.setAttribute("userName", name);
+			session.setAttribute("roleName", role);
 			return m;
 		}
 		System.out.println("失败"+user.getPassword());

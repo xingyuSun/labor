@@ -9,7 +9,7 @@ public class User {
 
     private String password;
 
-    private Integer roleid;
+    private String rolename;
 
     private String userremark;
 
@@ -45,12 +45,12 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getRoleid() {
-        return roleid;
+    public String getRolename() {
+        return rolename;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
     }
 
     public String getUserremark() {

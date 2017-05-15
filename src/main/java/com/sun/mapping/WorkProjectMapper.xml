@@ -13,11 +13,11 @@
   </sql>
   
   <select id="checkWorkProject" parameterType="com.sun.pojo.WorkProject"  resultType="java.util.HashMap">
-     select * from workproject where  workprojectID = #{workprojectid,jdbcType=INTEGER} or workprojectName = #{workprojectname,jdbcType=VARCHAR}
+     select * from workproject where  workProjectID = #{workprojectid,jdbcType=INTEGER} or workProjectName = #{workprojectname,jdbcType=VARCHAR}
   </select> 
    
   <select id="checkChange"  parameterType="com.sun.pojo.WorkProject" resultType="java.util.HashMap" >
-     select * from workproject where workprojectName = #{workprojectname,jdbcType=VARCHAR}
+     select * from workproject where workProjectName = #{workprojectname,jdbcType=VARCHAR}
   </select>
    
   <select id="getWorkProject"  resultType="java.util.HashMap">

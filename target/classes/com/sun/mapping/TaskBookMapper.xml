@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.TaskBookDao" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.TaskBook" >
+    <id column="taskBookID" property="taskbookid" jdbcType="INTEGER" />
+    <result column="taskBookType" property="taskbooktype" jdbcType="VARCHAR" />
+    <result column="projectName" property="projectname" jdbcType="VARCHAR" />
+    <result column="departmentName" property="departmentname" jdbcType="VARCHAR" />
+    <result column="buildingsNum" property="buildingsnum" jdbcType="VARCHAR" />
+    <result column="settlementUnitName" property="settlementunitname" jdbcType="VARCHAR" />
+    <result column="workTime" property="worktime" jdbcType="VARCHAR" />
+    <result column="submitTime" property="submittime" jdbcType="VARCHAR" />
+    <result column="contractType" property="contracttype" jdbcType="VARCHAR" />
+    <result column="divisionName" property="divisionname" jdbcType="VARCHAR" />
+    <result column="workProjectName" property="workprojectname" jdbcType="VARCHAR" />
+    <result column="workProjectParts" property="workprojectparts" jdbcType="VARCHAR" />
+    <result column="specificParts" property="specificparts" jdbcType="VARCHAR" />
+    <result column="unitName" property="unitname" jdbcType="VARCHAR" />
+    <result column="unitPrice" property="unitprice" jdbcType="VARCHAR" />
+    <result column="monthWorkload" property="monthworkload" jdbcType="INTEGER" />
+    <result column="wage" property="wage" jdbcType="VARCHAR" />
+    <result column="accumulatedWorkload" property="accumulatedworkload" jdbcType="INTEGER" />
+    <result column="taskBookRemarks" property="taskbookremarks" jdbcType="VARCHAR" />
+    <result column="reviewStatus" property="reviewstatus" jdbcType="VARCHAR" />
+    <result column="reviewor" property="reviewor" jdbcType="VARCHAR" />
+    <result column="reviewResult" property="reviewresult" jdbcType="VARCHAR" />
+    <result column="reviewTime" property="reviewtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    taskBookID, taskBookType, projectName, departmentName, buildingsNum, settlementUnitName, 
+    workTime, submitTime, contractType, divisionName, workProjectName, workProjectParts, 
+    specificParts, unitName, unitPrice, monthWorkload, wage, accumulatedWorkload, taskBookRemarks, 
+    reviewStatus, reviewor, reviewResult, reviewTime
+  </sql>
+  
+  <select id="checkTaskBook" parameterType="com.sun.pojo.TaskBook"  resultType="java.util.HashMap">
+     select * from taskbook where  taskBookID = #{taskbookid,jdbcType=INTEGER}
+  </select> 
+   
+   
+  <select id="getTaskBook" parameterType="java.lang.String"  resultType="java.util.HashMap">
+     select * from taskbook where taskBookType=#{taskbooktype,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="getTaskBookStatus" parameterType="java.lang.String"  resultType="java.util.HashMap">
+     select * from taskbook where reviewStatus=#{reviewstatus,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="getTaskBookAll"  resultType="java.util.HashMap">
+     select * from taskbook
+  </select>
+  
+      <update id="reviewTaskBook" parameterType="com.sun.pojo.TaskBook" >
+    update taskbook
+    set reviewStatus = #{reviewstatus,jdbcType=VARCHAR},
+      reviewor = #{reviewor,jdbcType=VARCHAR},
+      reviewResult = #{reviewresult,jdbcType=VARCHAR},
+      reviewTime = #{reviewtime,jdbcType=VARCHAR}
+    where taskBookID = #{taskbookid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  
+
+    <update id="changeTaskBook" parameterType="com.sun.pojo.TaskBook" >
+    update taskbook
+    set taskBookType = #{taskbooktype,jdbcType=VARCHAR},
+      projectName = #{projectname,jdbcType=VARCHAR},
+      departmentName = #{departmentname,jdbcType=VARCHAR},
+      buildingsNum = #{buildingsnum,jdbcType=VARCHAR},
+      settlementUnitName = #{settlementunitname,jdbcType=VARCHAR},
+      workTime = #{worktime,jdbcType=VARCHAR},
+      submitTime = #{submittime,jdbcType=VARCHAR},
+      contractType = #{contracttype,jdbcType=VARCHAR},
+      divisionName = #{divisionname,jdbcType=VARCHAR},
+      workProjectName = #{workprojectname,jdbcType=VARCHAR},
+      workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
+      specificParts = #{specificparts,jdbcType=VARCHAR},
+      unitName = #{unitname,jdbcType=VARCHAR},
+      unitPrice = #{unitprice,jdbcType=VARCHAR},
+      monthWorkload = #{monthworkload,jdbcType=INTEGER},
+      wage = #{unitprice,jdbcType=VARCHAR}*#{monthworkload,jdbcType=INTEGER},
+      accumulatedWorkload = #{accumulatedworkload,jdbcType=INTEGER},
+      taskBookRemarks = #{taskbookremarks,jdbcType=VARCHAR},
+      reviewStatus = #{reviewstatus,jdbcType=VARCHAR},
+      reviewor = #{reviewor,jdbcType=VARCHAR},
+      reviewResult = #{reviewresult,jdbcType=VARCHAR},
+      reviewTime = #{reviewtime,jdbcType=VARCHAR}
+    where taskBookID = #{taskbookid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from taskbook
+    where taskBookID = #{taskbookid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from taskbook
+    where taskBookID = #{taskbookid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.TaskBook" >
+    insert into taskbook (taskBookID, taskBookType, projectName, 
+      departmentName, buildingsNum, settlementUnitName, 
+      workTime, submitTime, contractType, 
+      divisionName, workProjectName, workProjectParts, 
+      specificParts, unitName, unitPrice, 
+      monthWorkload, wage, accumulatedWorkload, 
+      taskBookRemarks, reviewStatus, reviewor, 
+      reviewResult, reviewTime)
+    values (#{taskbookid,jdbcType=INTEGER}, #{taskbooktype,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, 
+      #{departmentname,jdbcType=VARCHAR}, #{buildingsnum,jdbcType=VARCHAR}, #{settlementunitname,jdbcType=VARCHAR}, 
+      #{worktime,jdbcType=VARCHAR}, #{submittime,jdbcType=VARCHAR}, #{contracttype,jdbcType=VARCHAR}, 
+      #{divisionname,jdbcType=VARCHAR}, #{workprojectname,jdbcType=VARCHAR}, #{workprojectparts,jdbcType=VARCHAR}, 
+      #{specificparts,jdbcType=VARCHAR}, #{unitname,jdbcType=VARCHAR}, #{unitprice,jdbcType=VARCHAR}, 
+      #{monthworkload,jdbcType=INTEGER},  #{unitprice,jdbcType=VARCHAR}*#{monthworkload,jdbcType=INTEGER}, #{accumulatedworkload,jdbcType=INTEGER}, 
+      #{taskbookremarks,jdbcType=VARCHAR}, #{reviewstatus,jdbcType=VARCHAR}, #{reviewor,jdbcType=VARCHAR}, 
+      #{reviewresult,jdbcType=VARCHAR}, #{reviewtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.TaskBook" >
+    insert into taskbook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskbookid != null" >
+        taskBookID,
+      </if>
+      <if test="taskbooktype != null" >
+        taskBookType,
+      </if>
+      <if test="projectname != null" >
+        projectName,
+      </if>
+      <if test="departmentname != null" >
+        departmentName,
+      </if>
+      <if test="buildingsnum != null" >
+        buildingsNum,
+      </if>
+      <if test="settlementunitname != null" >
+        settlementUnitName,
+      </if>
+      <if test="worktime != null" >
+        workTime,
+      </if>
+      <if test="submittime != null" >
+        submitTime,
+      </if>
+      <if test="contracttype != null" >
+        contractType,
+      </if>
+      <if test="divisionname != null" >
+        divisionName,
+      </if>
+      <if test="workprojectname != null" >
+        workProjectName,
+      </if>
+      <if test="workprojectparts != null" >
+        workProjectParts,
+      </if>
+      <if test="specificparts != null" >
+        specificParts,
+      </if>
+      <if test="unitname != null" >
+        unitName,
+      </if>
+      <if test="unitprice != null" >
+        unitPrice,
+      </if>
+      <if test="monthworkload != null" >
+        monthWorkload,
+      </if>
+      <if test="wage != null" >
+        wage,
+      </if>
+      <if test="accumulatedworkload != null" >
+        accumulatedWorkload,
+      </if>
+      <if test="taskbookremarks != null" >
+        taskBookRemarks,
+      </if>
+      <if test="reviewstatus != null" >
+        reviewStatus,
+      </if>
+      <if test="reviewor != null" >
+        reviewor,
+      </if>
+      <if test="reviewresult != null" >
+        reviewResult,
+      </if>
+      <if test="reviewtime != null" >
+        reviewTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskbookid != null" >
+        #{taskbookid,jdbcType=INTEGER},
+      </if>
+      <if test="taskbooktype != null" >
+        #{taskbooktype,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null" >
+        #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingsnum != null" >
+        #{buildingsnum,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementunitname != null" >
+        #{settlementunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="worktime != null" >
+        #{worktime,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        #{submittime,jdbcType=VARCHAR},
+      </if>
+      <if test="contracttype != null" >
+        #{contracttype,jdbcType=VARCHAR},
+      </if>
+      <if test="divisionname != null" >
+        #{divisionname,jdbcType=VARCHAR},
+      </if>
+      <if test="workprojectname != null" >
+        #{workprojectname,jdbcType=VARCHAR},
+      </if>
+      <if test="workprojectparts != null" >
+        #{workprojectparts,jdbcType=VARCHAR},
+      </if>
+      <if test="specificparts != null" >
+        #{specificparts,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null" >
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitprice != null" >
+        #{unitprice,jdbcType=VARCHAR},
+      </if>
+      <if test="monthworkload != null" >
+        #{monthworkload,jdbcType=INTEGER},
+      </if>
+      <if test="wage != null" >
+        #{wage,jdbcType=VARCHAR},
+      </if>
+      <if test="accumulatedworkload != null" >
+        #{accumulatedworkload,jdbcType=INTEGER},
+      </if>
+      <if test="taskbookremarks != null" >
+        #{taskbookremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatus != null" >
+        #{reviewstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewor != null" >
+        #{reviewor,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewresult != null" >
+        #{reviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewtime != null" >
+        #{reviewtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sun.pojo.TaskBook" >
+    update taskbook
+    <set >
+      <if test="taskbooktype != null" >
+        taskBookType = #{taskbooktype,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null" >
+        projectName = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null" >
+        departmentName = #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingsnum != null" >
+        buildingsNum = #{buildingsnum,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementunitname != null" >
+        settlementUnitName = #{settlementunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="worktime != null" >
+        workTime = #{worktime,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        submitTime = #{submittime,jdbcType=VARCHAR},
+      </if>
+      <if test="contracttype != null" >
+        contractType = #{contracttype,jdbcType=VARCHAR},
+      </if>
+      <if test="divisionname != null" >
+        divisionName = #{divisionname,jdbcType=VARCHAR},
+      </if>
+      <if test="workprojectname != null" >
+        workProjectName = #{workprojectname,jdbcType=VARCHAR},
+      </if>
+      <if test="workprojectparts != null" >
+        workProjectParts = #{workprojectparts,jdbcType=VARCHAR},
+      </if>
+      <if test="specificparts != null" >
+        specificParts = #{specificparts,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null" >
+        unitName = #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitprice != null" >
+        unitPrice = #{unitprice,jdbcType=VARCHAR},
+      </if>
+      <if test="monthworkload != null" >
+        monthWorkload = #{monthworkload,jdbcType=INTEGER},
+      </if>
+      <if test="wage != null" >
+        wage = #{wage,jdbcType=VARCHAR},
+      </if>
+      <if test="accumulatedworkload != null" >
+        accumulatedWorkload = #{accumulatedworkload,jdbcType=INTEGER},
+      </if>
+      <if test="taskbookremarks != null" >
+        taskBookRemarks = #{taskbookremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatus != null" >
+        reviewStatus = #{reviewstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewor != null" >
+        reviewor = #{reviewor,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewresult != null" >
+        reviewResult = #{reviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewtime != null" >
+        reviewTime = #{reviewtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where taskBookID = #{taskbookid,jdbcType=INTEGER}
+  </update>
+
+</mapper>

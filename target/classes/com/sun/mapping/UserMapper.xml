@@ -6,11 +6,11 @@
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="loginName" jdbcType="VARCHAR" property="loginname" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="roleID" jdbcType="INTEGER" property="roleid" />
+    <result column="roleName" jdbcType="INTEGER" property="rolename" />
     <result column="userRemark" jdbcType="VARCHAR" property="userremark" />
   </resultMap>
   <sql id="Base_Column_List">
-    userID, userName, loginName, password, roleID, userRemark
+    userID, userName, loginName, password, roleName, userRemark
   </sql>
   
   
@@ -43,10 +43,10 @@
   </delete>
   <insert id="insert" parameterType="com.sun.pojo.User">
     insert into user (userID, userName, loginName, 
-      password, roleID, userRemark
+      password, roleName, userRemark
       )
     values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{roleid,jdbcType=INTEGER}, #{userremark,jdbcType=VARCHAR}
+      #{password,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, #{userremark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sun.pojo.User">
@@ -64,8 +64,8 @@
       <if test="password != null">
         password,
       </if>
-      <if test="roleid != null">
-        roleID,
+      <if test="rolename != null">
+        roleName,
       </if>
       <if test="userremark != null">
         userRemark,
@@ -84,8 +84,8 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="roleid != null">
-        #{roleid,jdbcType=INTEGER},
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
       </if>
       <if test="userremark != null">
         #{userremark,jdbcType=VARCHAR},
@@ -104,8 +104,8 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="roleid != null">
-        roleID = #{roleid,jdbcType=INTEGER},
+      <if test="rolename != null">
+        roleName = #{rolename,jdbcType=VARCHAR},
       </if>
       <if test="userremark != null">
         userRemark = #{userremark,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
     set userName = #{username,jdbcType=VARCHAR},
       loginName = #{loginname,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      roleID = #{roleid,jdbcType=INTEGER},
+      roleName = #{rolename,jdbcType=VARCHAR},
       userRemark = #{userremark,jdbcType=VARCHAR}
     where userID = #{userid,jdbcType=INTEGER}
   </update>

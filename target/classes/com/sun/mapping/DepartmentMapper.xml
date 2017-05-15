@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.dao.DepartmentDao" >
+  <resultMap id="BaseResultMap" type="com.sun.pojo.DepartmentKey" >
+    <id column="departmentID" property="departmentid" jdbcType="INTEGER" />
+    <id column="departmentName" property="departmentname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="checkDepartment" parameterType="com.sun.pojo.DepartmentKey"  resultType="java.util.HashMap">
+     select * from department where  departmentID = #{departmentid,jdbcType=INTEGER} or departmentName = #{departmentname,jdbcType=VARCHAR}
+  </select> 
+   
+  <select id="checkChange"  parameterType="com.sun.pojo.DepartmentKey" resultType="java.util.HashMap" >
+     select * from department where departmentName = #{departmentname,jdbcType=VARCHAR}
+  </select>
+   
+  <select id="getDepartment"  resultType="java.util.HashMap">
+     select * from department
+  </select>
+  
+  <update id="changeDepartment"  parameterType="com.sun.pojo.DepartmentKey">
+     update department set departmentName = #{departmentname,jdbcType=VARCHAR} where departmentID = #{departmentid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.DepartmentKey" >
+    delete from department
+    where departmentID = #{departmentid,jdbcType=INTEGER}
+      and departmentName = #{departmentname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sun.pojo.DepartmentKey" >
+    insert into department (departmentID, departmentName)
+    values (#{departmentid,jdbcType=INTEGER}, #{departmentname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sun.pojo.DepartmentKey" >
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departmentid != null" >
+        departmentID,
+      </if>
+      <if test="departmentname != null" >
+        departmentName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departmentid != null" >
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="departmentname != null" >
+        #{departmentname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
