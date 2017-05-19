@@ -158,7 +158,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" id="addtask" class="btn btn-primary">确认</button>
+                                <button type="button" id="addtask" class="btn btn-primary" data-dismiss="modal">确认</button>
                             </div>
                         </form>
 
@@ -193,7 +193,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" id="changetask" class="btn btn-primary">确认</button>
+                                <button type="button" id="changetask" class="btn btn-primary" data-dismiss="modal">确认</button>
                             </div>
                         </form>
 
@@ -363,7 +363,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("修改成功");    		
+					  alert("修改成功");
+					  window.location.reload();    		
             		
          		  }
         		   else
@@ -395,7 +396,9 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("添加成功");    		
+					  alert("添加成功");
+					  window.location.reload();
+					      		
          		  }
         		   else
          		  {
@@ -436,7 +439,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("删除成功");    		
+					  alert("删除成功");  
+					  window.location.reload();  		
          		  }
         		   else
          		  {

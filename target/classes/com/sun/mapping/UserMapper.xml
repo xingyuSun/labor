@@ -18,6 +18,17 @@
      select * from user
    </select>
   
+  <update id="changeUser"  parameterType="com.sun.pojo.User">
+    update user
+    set userName = #{username,jdbcType=VARCHAR},
+      loginName = #{loginname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      roleName = #{rolename,jdbcType=VARCHAR},
+      userRemark = #{userremark,jdbcType=VARCHAR}
+    where userID = #{userid,jdbcType=INTEGER}
+  </update>
+
+
   
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -37,7 +48,7 @@
   </select>
   
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.User">
     delete from user
     where userID = #{userid,jdbcType=INTEGER}
   </delete>

@@ -14,29 +14,29 @@ import com.sun.service.UserService;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	@Resource
-	private UserDao userDao;
+	private UserDao UserDao;
 	@Override
 	public User getUserById(int userId) {
 		// TODO Auto-generated method stub
-		return this.userDao.selectByPrimaryKey(userId);
+		return this.UserDao.selectByPrimaryKey(userId);
 	}
 	
 	@Override
 	public List<Map<String, Object>> getUser() {
 		// TODO Auto-generated method stub
-		return this.userDao.getUser();
+		return this.UserDao.getUser();
 	}
 	
 	
 	public User getUserByLoginName(String str) {
 		// TODO Auto-generated method stub
-		return this.userDao.selectByloginname(str);
+		return this.UserDao.selectByloginname(str);
 	}
 	public boolean userCheckLoginName(User user) {
 		// TODO Auto-generated method stub
 		if(user==null) return false;
 		
-		User u=userDao.selectByloginname(user.getLoginname());
+		User u=UserDao.selectByloginname(user.getLoginname());
 		if(u==null) return true;
 		return false;
 	}
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 		//判断用户是否存在
 		boolean flg=userCheckLoginName(user);
 		if(flg) return false;
-		User u=userDao.selectByloginname(user.getLoginname());
+		User u=UserDao.selectByloginname(user.getLoginname());
 		String password= u.getPassword();
 		String userPassword=user.getPassword();
 		if(userPassword.equals(password)) flg=true;
@@ -57,7 +57,37 @@ public class UserServiceImpl implements UserService {
 
 	}
 	
-	
+	@Override
+	public boolean changeUser(User User) {
+		// TODO Auto-generated method stub
+			if(this.UserDao.changeUser(User))
+			return true;
+
+			else
+			return false;
+	}
+
+	@Override
+	public boolean deleteByPrimaryKey(User User) {
+		// TODO Auto-generated method stub
+		if(this.UserDao.deleteByPrimaryKey(User))
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	public boolean insert(User User) {
+		// TODO Auto-generated method stub
+		if(userCheckLoginName(User)){
+		  if(this.UserDao.insert(User))
+			return true;
+		  else
+			return false;
+		}
+		else
+		return false;
+	}
 
 	
 }

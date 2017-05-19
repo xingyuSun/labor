@@ -10,6 +10,17 @@
     roleID, roleName, roleRemarks
   </sql>
   
+  <select id="checkRole" parameterType="com.sun.pojo.Role"  resultType="java.util.HashMap">
+     select * from role where  roleID = #{roleid,jdbcType=INTEGER} or roleName = #{rolename,jdbcType=VARCHAR}
+  </select> 
+   
+  <select id="checkChange"  parameterType="com.sun.pojo.Role" resultType="java.util.HashMap" >
+     select * from role where roleName = #{rolename,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="changeRole"  parameterType="com.sun.pojo.Role">
+     update role set roleName = #{rolename,jdbcType=VARCHAR},roleRemarks = #{roleremarks,jdbcType=VARCHAR} where roleID = #{roleid,jdbcType=INTEGER}
+  </update>
   
   <select id="getIDByName" parameterType="java.lang.String"  resultType="java.lang.Integer">
      select roleID  from role where roleName = #{rolename}
@@ -26,7 +37,7 @@
     from role
     where roleID = #{roleid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="com.sun.pojo.Role">
     delete from role
     where roleID = #{roleid,jdbcType=INTEGER}
   </delete>

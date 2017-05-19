@@ -445,7 +445,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("修改成功");    		
+					  alert("修改成功");
+					  window.location.reload();    		
             		
          		  }
         		   else
@@ -481,7 +482,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("添加成功");    		
+					  alert("添加成功");
+					  window.location.reload();    		
          		  }
         		   else
          		  {
@@ -522,7 +524,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("删除成功");    		
+					  alert("删除成功");
+					  window.location.reload();    		
          		  }
         		   else
          		  {

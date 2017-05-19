@@ -7,12 +7,13 @@ import java.util.Map;
 import com.sun.pojo.User;
 
 public interface UserDao {
-    int deleteByPrimaryKey(Integer userid);
+    boolean deleteByPrimaryKey(User User);
 
 	public List<Map<String,Object>> getUser();
 
+	public boolean changeUser(User User);
     
-    int insert(User record);
+	boolean insert(User record);
 
     int insertSelective(User record);
 

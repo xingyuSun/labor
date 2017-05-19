@@ -4,15 +4,22 @@ import java.util.List;
 import java.util.Map;
 
 import com.sun.pojo.Role;
+import com.sun.pojo.Role;
 
 public interface RoleDao {
 	public List<Map<String,Object>> getRole();
 	
-    int deleteByPrimaryKey(Integer roleid);
+	public List<Map<String,Object>> checkRole(Role Role);
+	
+	public List<Map<String,Object>> checkChange(Role Role);
+	
+	public boolean changeRole(Role Role);
+	
+	boolean deleteByPrimaryKey(Role Role);
     
     int getIDByName(String rolename);
 
-    int insert(Role record);
+    boolean insert(Role record);
 
     int insertSelective(Role record);
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sun.pojo.User;
+import com.sun.pojo.User;
 
 public interface UserService {
 	//
@@ -19,5 +20,13 @@ public interface UserService {
 	
 	
 	public List<Map<String,Object>> getUser();
+	
+	public boolean changeUser(User User);
+	
+	public boolean deleteByPrimaryKey(User User);
+
+	public boolean insert(User User);
+	
+
 	
 }

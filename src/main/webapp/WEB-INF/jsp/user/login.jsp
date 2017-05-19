@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>朝朝利个人理财系统 | Log in</title>
+  <title>诚业建筑装饰劳务管理系统 | Log in</title>
   <%String path=request.getContextPath();%>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -61,13 +61,9 @@
         <!-- /.col -->
     </form>
 
-
-    <a href="#">忘记密码</a>
-    <a href="<%=request.getContextPath()%>/user/register" class="text-center pull-right">注册新账号</a>
     </div>
   </div>
   <!-- /.login-box-body -->
-</div>
 <!-- /.login-box -->
 
 <!-- jQuery 2.2.0 -->

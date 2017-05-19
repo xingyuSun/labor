@@ -44,17 +44,17 @@
 
     <jsp:include flush="true" page="../head.jsp"></jsp:include>
     <jsp:include flush="true" page="../catalog.jsp"></jsp:include>
-    
-        <!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                分部标准（分部）
+                  审核历史纪录
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i>装饰基础信息管理</a></li>
-                <li class="active">分部标准（分部）</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>装饰任务书查询审核历史纪录</a></li>
+                <li class="active">审核历史纪录</li>
             </ol>
         </section>
 
@@ -64,38 +64,41 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">分布基本信息列表</h3>
+                            <h3 class="box-title">审核历史纪录</h3>
                         </div>
+
 
                         <!-- /.box-header table-responsive mailbox-messages -->
                         <div class="box-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>分部编号</th>
-                                    <th>分部名</th>
-                                    <th><button type="button" id="changemodal" class="btn btn-block btn-info"   style="width: 60px">修改</button></th>
-                                    <th><button type="button" id="delete" class="btn btn-block btn-info"  style="width: 60px">删除</button></th>
+                                    <th>序号</th>
+                                    <th>工程名称</th>
+                                    <th>类型</th>
+                                    <th>审核结果</th>
+                                    <th>审核人</th>
+                                    <th>审核时间</th>
+                                   <th style="width: 0px">  </th>
+                                    <th><button type="button" id="reviewmodal" class="btn btn-block btn-info"   style="width: 60px">审核历史纪录</button></th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
                                 	 <c:forEach items="${listMap}" var="item">
                                      	<tr>
-                                   			<td name="divisionID">${item.divisionID}</td>
-                                   			<td name="divisionName">${item.divisionName}</td>
+                                   			<td name="taskBookID">${item.taskBookID}</td>
+                                   			<td name="projectName">${item.projectName}</td>
+                                   			<td name="taskBookType">${item.taskBookType}</td>
+                                   			<td name="reviewStatus">${item.reviewStatus}</td>
+                                   			<td name="reviewStatus">${item.historyor}</td>
+                                   			<td name="reviewStatus">${item.historyTime}</td>
+                                   			<td name="reviewResult" style="VISIBILITY:hidden;width: 0px">${item.reviewResult}</td>
                                    			<td><input type="radio" name="ss"></td>
-                                            <td><input type="checkbox"></td>
                                      	</tr>
                                      </c:forEach>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>  </th>
-                                    <th>  </th>
-                                    <th> <button type="button" class="btn btn-block btn-info" id="addmodal"  style="width: 60px">添加</button> </th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                           </table>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -103,36 +106,27 @@
                 </div>
                 <!-- /.col -->
             </div>
-
-
-
-            <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            
+            
+             <div id="review" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h4 class="modal-title">
                                 <i class="icon-pencil"></i>
-                                <span id="AddTitle" style="font-weight:bold">添加分部</span>
+                                <span id="ChangeTitle" style="font-weight:bold">意见</span>
                             </h4>
                         </div>
 
-                        <form class="form-horizontal form-bordered form-row-strippe" id="addfrom" action="" data-toggle="validator" enctype="multipart/form-data">
+                        <form class="form-horizontal form-bordered form-row-strippe" id="changefrom" action=""  data-toggle="validator" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="control-label col-md-2">分部编号</label>
+                                            <label class="control-label col-md-2">审核意见</label>
                                             <div class="col-md-10">
-                                                <input id="divisionidadd" name="divisionname" type="text" class="form-control" placeholder="分部编号..." />
-                                            </div>
-                                        </div>
-                                    </div>                                
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">分部名称</label>
-                                            <div class="col-md-10">
-                                                <input id="divisionnameadd" name="divisionname" type="text" class="form-control" placeholder="分部名称..." />
+                                                <textarea id="reviewresult" name="reviewresult" class="form-control"  rows="8" placeholder="Enter ..."></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -140,55 +134,21 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" id="adddivision" class="btn btn-primary">确认</button>
+                                <button type="button" id="reviewn" class="btn btn-primary" data-dismiss="modal">审核历史纪录不通过</button>
+                                <button type="button" id="reviewy" class="btn btn-primary" data-dismiss="modal">审核历史纪录通过</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
-            </div>
+            </div>            
             
             
-            <div id="change" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header bg-primary">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">
-                                <i class="icon-pencil"></i>
-                                <span id="lblAddOneTitle" style="font-weight:bold">修改分部</span>
-                            </h4>
-                        </div>
-
-
-                        <form class="form-horizontal form-bordered form-row-strippe" id="changefrom" action="" data-toggle="validator" enctype="multipart/form-data">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-2">分部名称</label>
-                                            <div class="col-md-10">
-                                                <input id="divisionnamechange" type="text" class="form-control" placeholder="分部名称..." />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" id="changedivision" class="btn btn-primary">确认</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>     
+            
             <!-- /.row -->
         </section>
         <!-- /.content -->
-
     </div>
-
 
 </div>
 
@@ -224,7 +184,6 @@
 <!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->
 <div class="control-sidebar-bg"></div>
-</div>
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
@@ -235,6 +194,10 @@
 <script src="<%=path%>/select2/select2.full.min.js"></script>
 <!-- iCheck -->
 <script src="<%=path%>/iCheck/icheck.min.js"></script>
+<!-- InputMask -->
+<script src="<%=path%>/input-mask/jquery.inputmask.js"></script>
+<script src="<%=path%>/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="<%=path%>/input-mask/jquery.inputmask.extensions.js"></script>
 <!-- DataTables -->
 <script src="<%=path%>/datatables/jquery.dataTables.min.js"></script>
 <script src="<%=path%>/datatables/dataTables.bootstrap.min.js"></script>
@@ -242,7 +205,8 @@
 <!-- date-range-picker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
-
+<!-- bootstrap datepicker -->
+<script src="<%=path%>/datepicker/bootstrap-datepicker.js"></script>
 <!-- SlimScroll 1.3.0 -->
 <script src="<%=path%>/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -251,9 +215,6 @@
 <script src="<%=path%>/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=path%>/dist/js/demo.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
 
 <script type="text/javascript" src="<%=path%>/dist/js/bootstrapValidator.js"></script>
 <script type="text/javascript" src="<%=path%>/dist/js/jquery-confirm.min.js"></script>
@@ -264,37 +225,33 @@
         $('#reservation1').daterangepicker();
     });
 
-          $("#changemodal").click(function(){
 
-                $("#change").modal();
-                //document.getElementById('divisionbookid').value = h;
-                //$("#identifier").modal();  
+          $("#reviewmodal").click(function(){
+           $("#review").modal();
           });
-          
-            $("#addmodal").click(function(){
-                $("#add").modal();
-            });
-  
-  
 
-          
-          
-         $("#changedivision").click(function(){
+        function p(s) {
+             return s < 10 ? '0' + s: s;
+          }
+
+          var myDate = new Date();
+          var now=myDate.getFullYear()+'-'+p(myDate.getMonth()+1)+"-"+p(myDate.getDate())+" "+p(myDate.getHours())+':'+p(myDate.getMinutes())+":"+p(myDate.getSeconds());
+               
+         $("#reviewy").click(function(){
             $("input[type='radio']:checked").each(function() { // 遍历选中的checkbox
                 n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
                 //alert(n);
-                h = $(this).parents("tr").find("[name='divisionID']").text();
-                s = $(this).parents("tr").find("[name='divisionName']").text();
+                h = $(this).parents("tr").find("[name='taskBookID']").text();                                                         
                 //alert(h);
             });     
-            
  	        var jsontest={
-     			 divisionid:h,
-     			 divisionname:$("#divisionnamechange").val()
+     			 taskbookid:h,
+     			 reviewtime:now,
+     			 taskbookremarks:"通过",
+      			 reviewresult:$("#reviewresult").val()
     	        };
-               var $a = $(this);  
                $.ajax({  
-                  url:"<%=request.getContextPath()%>/decorationinfo/changeDivision",  
+                  url:"<%=request.getContextPath()%>/taskbookviewreview/doreview",  
                   type:'post',  
                   data:jsontest,  
                   dataType: 'json',  
@@ -302,13 +259,17 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("修改成功");
-					  window.location.reload();    		
+					  alert("审核历史纪录成功");  
+					  window.location.reload();  		
             		
          		  }
-        		   else
+        		   else if (data && data.success == "flase") 
          		  {
-         		  	alert("修改失败");   
+         		  	alert("审核历史纪录失败");   
+         		  }  
+         		  else
+         		  {
+         		  	alert("您没有审核历史纪录权限");   
          		  }  
         		  },        
        			   error:function(data){              
@@ -316,83 +277,8 @@
               }); 
             
         });
-  
-  
-          $("#adddivision").click(function(){
-   
-    	    var jsontest={
-     			 divisionid:$("#divisionidadd").val(),
-     			 divisionname:$("#divisionnameadd").val()
-    	        };
-
-               $.ajax({
-                  url:"<%=request.getContextPath()%>/decorationinfo/addDivision",  
-                  type:"post",  
-                  //data:$.toJSON(divisionArray),  
-                  data:jsontest,
-                  dataType: "json",  
-  
-        		  success:function(data){
-         		  if (data && data.success == "true") 
-         		  {
-					  alert("添加成功");
-					  window.location.reload();    		
-         		  }
-        		   else
-         		  {
-         		  	alert("添加失败");   
-         		  }  
-        		  },        
-       			   error:function(data){              
-        		  } 
-              }); 
-             });
-
-  
-            
-           
-
-        $("#delete").click(function(){
-          var divisionArray = new Array();
-            $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
-                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-                
-                h = $(this).parents("tr").find("[name='divisionID']").text();
-                s = $(this).parents("tr").find("[name='divisionName']").text();
-                
-                divisionArray.push({divisionid: h, divisionname: s});
-    	   });
-    	    var jsontest={
-     			 divisionid:h,
-     			 divisionname:s
-    	        };
-    	        var $a = $(this);  
-               $.ajax({
-                  url:"<%=request.getContextPath()%>/decorationinfo/deleteDivision",  
-                  type:"post",  
-                  //data:$.toJSON(divisionArray),  
-                  data:jsontest,
-                  dataType: "json",  
-  
-        		  success:function(data){
-         		  if (data && data.success == "true") 
-         		  {
-					  alert("删除成功"); 
-					  window.location.reload();   		
-         		  }
-        		   else
-         		  {
-         		  	alert("删除失败");   
-         		  }  
-        		  },        
-       			   error:function(data){              
-        		  } 
-              }); 
-             });
         
-
- 
-
+  
 
 
 
@@ -401,6 +287,39 @@
 
 
 
+
+
+
+
+    //Date range picker
+    $('#reservation').daterangepicker();
+    $('#worktimeadd').daterangepicker();
+    $('#worktimechange').daterangepicker();
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+        {
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
+        },
+        function (start, end) {
+            $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+    );
+
+    //Date picker
+    $('#datepicker').datepicker({
+        autoclose: true
+    });
 
 
     $(document).ready(function() {
@@ -413,7 +332,7 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
-                    'divisionname': {
+                    'projectname': {
                         validators: {
                             notEmpty: {
                                 message: '不能为空'
@@ -421,8 +340,17 @@
                             },
                             stringLength: {
                                 min: 1,
-                                max: 10,
-                                message: '不超过十个字符'
+                                max: 50,
+                                message: '不超过50个字符'
+                            }
+                        }
+                    },
+                    'remarks': {
+                        validators: {
+                            stringLength: {
+                                min: 0,
+                                max: 250,
+                                message: '不能超过250字符'
                             }
                         }
                     }

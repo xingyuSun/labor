@@ -265,7 +265,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("审核成功");    		
+					  alert("审核成功");   
+					  window.location.reload(); 		
             		
          		  }
         		   else if (data && data.success == "flase") 
@@ -307,7 +308,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("审核成功");    		
+					  alert("审核成功");    	
+					  window.location.reload();	
             		
          		  }
         		   else if (data && data.success == "flase") 

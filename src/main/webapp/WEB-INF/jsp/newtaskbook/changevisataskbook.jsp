@@ -463,7 +463,8 @@
         		  success:function(data){
          		  if (data && data.success == "true") 
          		  {
-					  alert("添加成功");    		
+					  alert("添加成功");   
+					  window.location.reload(); 		
          		  }
         		   else
          		  {

@@ -81,7 +81,7 @@
                         <li><a href="<%=request.getContextPath()%>/taskbookviewreview/review"><i class="fa fa-circle-o"></i>审查</a></li>
                         <li><a href="<%=request.getContextPath()%>/taskbookviewreview/pendingreviewtaskbook"><i class="fa fa-circle-o"></i>已提交待审核任务书</a></li>
                         <li><a href="<%=request.getContextPath()%>/taskbookviewreview/retireunreviewtaskbook"><i class="fa fa-circle-o"></i>查看未审/退修任务书</a></li>
-                        <li><a href="<%=request.getContextPath()%>/taskbookviewreview/reviewrecord"><i class="fa fa-circle-o"></i>查看审核历史纪录</a></li>
+                        <li><a href="<%=request.getContextPath()%>/taskbookviewreview/reviewhistory"><i class="fa fa-circle-o"></i>查看审核历史纪录</a></li>
                         <li><a href="<%=request.getContextPath()%>/taskbookviewreview/selfreviewthenno"><i class="fa fa-circle-o"></i>本人已审后续未审查询</a></li>
                         <li><a href="<%=request.getContextPath()%>/taskbookviewreview/downloadtaskbook"><i class="fa fa-circle-o"></i>下载装饰任务书</a></li>
                         <li><a href="<%=request.getContextPath()%>/taskbookviewreview/notreatyetaskbook"><i class="fa fa-circle-o"></i>暂不处理任务书</a></li>

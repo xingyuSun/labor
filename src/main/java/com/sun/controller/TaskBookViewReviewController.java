@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.pojo.DivisionKey;
+import com.sun.pojo.History;
 import com.sun.pojo.Project;
 import com.sun.pojo.WorkProject;
 import com.sun.pojo.SettlementUnitKey;
@@ -27,6 +28,7 @@ import com.sun.pojo.TaskBook;
 import com.sun.service.BuildingsService;
 import com.sun.service.DepartmentService;
 import com.sun.service.DivisionService;
+import com.sun.service.HistoryService;
 import com.sun.service.ProjectService;
 import com.sun.service.SettlementUnitService;
 import com.sun.service.TaskBookService;
@@ -53,6 +55,8 @@ public class TaskBookViewReviewController {
 	private DepartmentService departmentService;
 	@Resource
 	private BuildingsService buildingsService;
+	@Resource
+	private HistoryService historyService;
 	
 	
 	
@@ -143,14 +147,39 @@ public class TaskBookViewReviewController {
 	}
 	
 	
+	@RequestMapping("/reviewhistory")
+	public ModelAndView ReviewHistory(HttpSession session){
+		Map nameAndID=getNameAndID(session);
+		int ID = Integer.valueOf(String.valueOf(nameAndID.get("userID")));
+		ModelAndView m = new ModelAndView("taskbookviewreview/reviewhistory");
+		List<Map<String,Object>> mapList=historyService.getHistory();
+
+		for(int i=0;i<mapList.size();i++){
+			System.out.println(mapList.get(i).get("taskBookID"));
+			System.out.println(mapList.get(i).get("historyTime"));
+		}
+		m.addObject("nameAndID", nameAndID);
+		m.addObject("listMap", mapList);
+		return m;
+	}
+	
+	
+	
 	@RequestMapping(value="/doreview",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String,Object> review(TaskBook TaskBook,HttpSession session) throws IOException{
 		String id=(String)session.getAttribute("userID");
 		String name=(String)session.getAttribute("userName");
 		String role = String.valueOf(session.getAttribute("roleName"));
+		History history = new History();
 		Map<String,Object> map = new HashMap<String,Object>();
+		System.out.println(TaskBook.getTaskbookid());
+		System.out.println(TaskBook.getReviewtime());
 		System.out.println(TaskBook.getReviewresult());
+		history.setTaskbookid(TaskBook.getTaskbookid());
+		history.setHistorytime(TaskBook.getReviewtime());
+		history.setHistoryor(name);
+		historyService.insert(history);
 		if(role.equals("审计")||role.equals("工长")||role.equals("项目经理")){
 		    TaskBook.setReviewor(name);
 		    if(TaskBook.getTaskbookremarks().equals("通过"))

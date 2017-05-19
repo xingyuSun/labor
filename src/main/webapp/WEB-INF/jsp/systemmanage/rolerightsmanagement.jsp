@@ -248,12 +248,12 @@
 <script src="<%=path%>/daterangepicker/daterangepicker.js"></script>
 <!-- page script -->
 <script>
-    $(function () {
+    $(function() {
         $("#example1").DataTable();
         $('#reservation1').daterangepicker();
     });
 
-    $(function () {
+    $(function(){
 
         //Enable iCheck plugin for checkboxes
         //iCheck for checkbox and radio inputs
@@ -261,34 +261,21 @@
             checkboxClass: 'icheckbox_flat-blue',
             radioClass: 'iradio_flat-blue'
         });
-        
-        $("#submit").click(function(){
-        alert("删除成功");  
-            if (${insert} == "true") 
-               {
-					  alert("删除成功");    		
-            		
-         	   }
-        	 else
-               {
-         		 alert("删除失败");   
-               }  
-        });
-       
+
         $("#delete").click(function(){
+            alert("22222");
             $("input[type='checkbox']:checked").each(function() { // 遍历选中的checkbox
                 n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
                 //alert(n);
                 h = $(this).parents("tr").find("[name='roleID']").text();
                 s = $(this).parents("tr").find("[name='rightsID']").text();
-                //alert(h);
+                alert(h);
             });
  	        var jsontest={
      			 roleid:h,
      			 rightsid:s
     	        };
     	    alert(jsontest);
-               var $a = $(this);  
                $.ajax({  
                   url:"<%=request.getContextPath()%>/systemmanage/deleteRolerights",  
                   type:'post',  
@@ -299,7 +286,7 @@
          		  if (data && data.success == "true") 
          		  {
 					  alert("删除成功");    		
-            		
+            		  window.location.reload();
          		  }
         		   else
          		  {
