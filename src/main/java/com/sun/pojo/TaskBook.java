@@ -2,6 +2,8 @@ package com.sun.pojo;
 
 public class TaskBook {
     private Integer taskbookid;
+    
+    private Integer userid;
 
     private String taskbooktype;
 
@@ -53,6 +55,14 @@ public class TaskBook {
 
     public void setTaskbookid(Integer taskbookid) {
         this.taskbookid = taskbookid;
+    }
+    
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public String getTaskbooktype() {

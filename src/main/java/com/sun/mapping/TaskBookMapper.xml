@@ -3,6 +3,7 @@
 <mapper namespace="com.sun.dao.TaskBookDao" >
   <resultMap id="BaseResultMap" type="com.sun.pojo.TaskBook" >
     <id column="taskBookID" property="taskbookid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
     <result column="taskBookType" property="taskbooktype" jdbcType="VARCHAR" />
     <result column="projectName" property="projectname" jdbcType="VARCHAR" />
     <result column="departmentName" property="departmentname" jdbcType="VARCHAR" />
@@ -27,7 +28,7 @@
     <result column="reviewTime" property="reviewtime" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    taskBookID, taskBookType, projectName, departmentName, buildingsNum, settlementUnitName, 
+    taskBookID,userID, taskBookType, projectName, departmentName, buildingsNum, settlementUnitName, 
     workTime, submitTime, contractType, divisionName, workProjectName, workProjectParts, 
     specificParts, unitName, unitPrice, monthWorkload, wage, accumulatedWorkload, taskBookRemarks, 
     reviewStatus, reviewor, reviewResult, reviewTime
@@ -42,6 +43,10 @@
      select * from taskbook where taskBookType=#{taskbooktype,jdbcType=VARCHAR}
   </select>
   
+  <select id="getTaskBookByUser" parameterType="java.lang.Integer"  resultType="java.util.HashMap">
+     select * from taskbook where userID=#{userid,jdbcType=INTEGER}
+  </select>
+  
   
   <select id="getTaskBookStatus" parameterType="java.lang.String"  resultType="java.util.HashMap">
      select * from taskbook where reviewStatus=#{reviewstatus,jdbcType=VARCHAR}
@@ -51,7 +56,7 @@
      select * from taskbook
   </select>
   
-      <update id="reviewTaskBook" parameterType="com.sun.pojo.TaskBook" >
+   <update id="reviewTaskBook" parameterType="com.sun.pojo.TaskBook" >
     update taskbook
     set reviewStatus = #{reviewstatus,jdbcType=VARCHAR},
       reviewor = #{reviewor,jdbcType=VARCHAR},
@@ -68,6 +73,7 @@
     <update id="changeTaskBook" parameterType="com.sun.pojo.TaskBook" >
     update taskbook
     set taskBookType = #{taskbooktype,jdbcType=VARCHAR},
+      userID = #{userid,jdbcType=INTEGER},
       projectName = #{projectname,jdbcType=VARCHAR},
       departmentName = #{departmentname,jdbcType=VARCHAR},
       buildingsNum = #{buildingsnum,jdbcType=VARCHAR},
@@ -107,7 +113,7 @@
     where taskBookID = #{taskbookid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.sun.pojo.TaskBook" >
-    insert into taskbook (taskBookID, taskBookType, projectName, 
+    insert into taskbook (taskBookID,userID, taskBookType, projectName, 
       departmentName, buildingsNum, settlementUnitName, 
       workTime, submitTime, contractType, 
       divisionName, workProjectName, workProjectParts, 
@@ -115,7 +121,7 @@
       monthWorkload, wage, accumulatedWorkload, 
       taskBookRemarks, reviewStatus, reviewor, 
       reviewResult, reviewTime)
-    values (#{taskbookid,jdbcType=INTEGER}, #{taskbooktype,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, 
+    values (#{taskbookid,jdbcType=INTEGER},#{userid,jdbcType=INTEGER}, #{taskbooktype,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, 
       #{departmentname,jdbcType=VARCHAR}, #{buildingsnum,jdbcType=VARCHAR}, #{settlementunitname,jdbcType=VARCHAR}, 
       #{worktime,jdbcType=VARCHAR}, #{submittime,jdbcType=VARCHAR}, #{contracttype,jdbcType=VARCHAR}, 
       #{divisionname,jdbcType=VARCHAR}, #{workprojectname,jdbcType=VARCHAR}, #{workprojectparts,jdbcType=VARCHAR}, 

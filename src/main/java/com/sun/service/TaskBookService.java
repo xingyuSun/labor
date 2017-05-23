@@ -11,6 +11,8 @@ public interface TaskBookService {
 	
 	public List<Map<String,Object>> getTaskBook(String s);
 	
+	public List<Map<String,Object>> getTaskBookByUser(int s);
+	
 	public List<Map<String,Object>> getTaskBookStatus(String s);
 	
 	public List<Map<String,Object>> getTaskBookAll();

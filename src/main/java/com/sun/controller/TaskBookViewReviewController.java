@@ -83,6 +83,7 @@ public class TaskBookViewReviewController {
 		String role = String.valueOf(session.getAttribute("roleName"));
 		ModelAndView m = new ModelAndView("taskbookviewreview/review");
 		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> mapListg = new ArrayList<Map<String,Object>>();
 		if(role.equals("审计"))
 		{
 			mapList=taskBookService.getTaskBookStatus("工长审核通过");
@@ -93,17 +94,18 @@ public class TaskBookViewReviewController {
 		}
 		else if(role.equals("工长"))
 		{
-			mapList=taskBookService.getTaskBookStatus("待审核");
+			mapListg=taskBookService.getTaskBookStatus("待审核");
+			for(int i=0;i<mapListg.size();i++){
+				   if(mapListg.get(i).get("userID").equals(ID)){
+					   mapList.add(mapListg.get(i));
+				   }
+			    }
 		}
 		else
 		{
 			mapList=taskBookService.getTaskBookAll();
 		}
 		
-//		for(int i=0;i<mapList.size();i++){
-//		System.out.println(mapList.get(i).get("reviewStatus"));
-//		System.out.println(mapList.get(i).get("reviewor"));
-//	    }
 		m.addObject("nameAndID", nameAndID);
 		m.addObject("listMap", mapList);
 		return m;
@@ -118,13 +120,13 @@ public class TaskBookViewReviewController {
 		ModelAndView m = new ModelAndView("taskbookviewreview/retireunreviewtaskbook");
 		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
 
-		if((role.equals("审计")||role.equals("工长")||role.equals("项目经理")))
+		if(role.equals("工长"))
 		{
-			mapList=taskBookService.getTaskBookAll();
+			mapList=taskBookService.getTaskBookByUser(ID);
 		}
 		else
 		{
-			mapList=taskBookService.getTaskBookAll();
+			mapList=taskBookService.getTaskBookByUser(ID);
 		}
 		
 		List<Map<String,Object>> mapListu=unitService.getUnit();
